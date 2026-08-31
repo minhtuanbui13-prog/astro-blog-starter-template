@@ -1,50 +1,91 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+// Không cần mã JavaScript phức tạp ở phần này
 ---
 
-<!doctype html>
-<html lang="en">
+<html lang="vi">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Tuấn Tech Store | Cửa Hàng Công Nghệ</title>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+		<style>
+			:root {
+				--primary: #2563eb;
+				--primary-hover: #1d4ed8;
+				--bg: #f8fafc;
+				--card-bg: #ffffff;
+				--text: #0f172a;
+				--text-muted: #64748b;
+			}
+
+			* { box-sizing: border-box; margin: 0; padding: 0; }
+			body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.5; }
+
+			header { background: var(--card-bg); border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10; }
+			.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+			.logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+
+			.hero { text-align: center; padding: 3rem 1rem 1.5rem; max-width: 800px; margin: 0 auto; }
+			.hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+			.hero p { color: var(--text-muted); font-size: 1rem; }
+
+			.products-grid { max-width: 1200px; margin: 2rem auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; padding: 0 1.5rem; }
+			.product-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+			.product-img { width: 100%; height: 180px; object-fit: cover; }
+			.product-info { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
+			.product-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+			.product-price { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+			.btn-buy { margin-top: auto; background: var(--primary); color: white; border: none; padding: 0.6rem 1rem; border-radius: 6px; font-weight: 600; text-align: center; text-decoration: none; transition: background 0.2s; }
+			.btn-buy:hover { background: var(--primary-hover); }
+
+			footer { text-align: center; padding: 2rem; margin-top: 3rem; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
+		</style>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<header>
+			<div class="nav-container">
+				<a href="#" class="logo">Tuấn Tech Store</a>
+				<span>Hotline: 0900 123 456</span>
+			</div>
+		</header>
+
+		<section class="hero">
+			<h1>Sản Phẩm Công Nghệ Chính Hãng</h1>
+			<p>Cam kết chất lượng cao – Giao hàng toàn quốc – Bảo hành uy tín</p>
+		</section>
+
+		<main class="products-grid">
+			<div class="product-card">
+				<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" class="product-img" alt="Điện thoại Smartphone X">
+				<div class="product-info">
+					<h2 class="product-title">Điện thoại Smartphone X</h2>
+					<div class="product-price">12.990.000 ₫</div>
+					<a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
+				</div>
+			</div>
+
+			<div class="product-card">
+				<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" class="product-img" alt="Laptop Pro">
+				<div class="product-info">
+					<h2 class="product-title">Laptop Văn Phòng Pro</h2>
+					<div class="product-price">18.500.000 ₫</div>
+					<a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
+				</div>
+			</div>
+
+			<div class="product-card">
+				<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" class="product-img" alt="Tai Nghe Không Dây">
+				<div class="product-info">
+					<h2 class="product-title">Tai Nghe Không Dây</h2>
+					<div class="product-price">2.450.000 ₫</div>
+					<a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
+				</div>
+			</div>
 		</main>
-		<Footer />
+
+		<footer>
+			<p>© 2026 Tuấn Tech Store. Bản quyền thuộc về Bùi Minh Tuấn.</p>
+		</footer>
 	</body>
 </html>
