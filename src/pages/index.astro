@@ -2,6 +2,33 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // Xử lý riêng cho tệp llms.txt theo chuẩn Markdown
+    if (url.pathname === "/llms.txt") {
+      const llmsTxt = `# Tuấn Tech Store
+
+> Cửa hàng bán lẻ sản phẩm công nghệ chính hãng tại Việt Nam.
+
+## Products
+- [Smartphone X](https://buiminhtuan.io.vn): Điện thoại công nghệ cao cấp.
+- [Laptop Pro](https://buiminhtuan.io.vn): Laptop làm việc và văn phòng.
+- [Tai Nghe Không Dây](https://buiminhtuan.io.vn): Thiết bị âm thanh chất lượng cao.
+
+## Contact
+- Owner: Bùi Minh Tuấn
+- Website: https://buiminhtuan.io.vn`;
+
+      return new Response(llmsTxt, {
+        headers: { "content-type": "text/markdown;charset=UTF-8" },
+      });
+    }
+
+    // Code HTML giao diện web bên dưới...
+  }
+};
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
     // Xử lý riêng cho file robots.txt chuẩn
     if (url.pathname === "/robots.txt") {
       const robotsTxt = `User-agent: *
@@ -24,7 +51,6 @@ Sitemap: https://buiminhtuan.io.vn/sitemap-index.xml`;
 ---
 // --- Phần này là nơi đặt code JavaScript của Astro, bạn hãy để trống nó ---
 ---
-
 <!DOCTYPE html>
 <html lang="vi">
 	<head>
