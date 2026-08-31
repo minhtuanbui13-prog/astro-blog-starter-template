@@ -1,3 +1,26 @@
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    // Xử lý riêng cho file robots.txt chuẩn
+    if (url.pathname === "/robots.txt") {
+      const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://buiminhtuan.io.vn/sitemap-index.xml`;
+
+      return new Response(robotsTxt, {
+        headers: { "content-type": "text/plain;charset=UTF-8" },
+      });
+    }
+
+    // Phần code HTML trang bán hàng Tuấn Tech Store của bạn bên dưới...
+    const html = `<!DOCTYPE html>...`;
+    return new Response(html, {
+      headers: { "content-type": "text/html;charset=UTF-8" },
+    });
+  },
+};
 ---
 // --- Phần này là nơi đặt code JavaScript của Astro, bạn hãy để trống nó ---
 ---
