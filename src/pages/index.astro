@@ -2,16 +2,43 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // Xử lý riêng cho tệp llms.txt theo chuẩn Markdown
+    // 1. Khai báo Sitemap XML chuẩn
+    if (url.pathname === "/sitemap.xml" || url.pathname === "/sitemap-index.xml") {
+      const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://buiminhtuan.io.vn/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+
+      return new Response(sitemapXml, {
+        headers: { "content-type": "application/xml;charset=UTF-8" },
+      });
+    }
+
+    // 2. Khai báo Robots.txt
+    if (url.pathname === "/robots.txt") {
+      const robotsTxt = `User-agent: *
+Allow: /
+Sitemap: https://buiminhtuan.io.vn/sitemap.xml`;
+
+      return new Response(robotsTxt, {
+        headers: { "content-type": "text/plain;charset=UTF-8" },
+      });
+    }
+
+    // 3. Khai báo LLMs.txt
     if (url.pathname === "/llms.txt") {
       const llmsTxt = `# Tuấn Tech Store
-
 > Cửa hàng bán lẻ sản phẩm công nghệ chính hãng tại Việt Nam.
 
 ## Products
-- [Smartphone X](https://buiminhtuan.io.vn): Điện thoại công nghệ cao cấp.
-- [Laptop Pro](https://buiminhtuan.io.vn): Laptop làm việc và văn phòng.
-- [Tai Nghe Không Dây](https://buiminhtuan.io.vn): Thiết bị âm thanh chất lượng cao.
+- Smartphone X: Điện thoại công nghệ cao cấp.
+- Laptop Pro: Laptop làm việc và văn phòng.
+- Tai Nghe Không Dây: Thiết bị âm thanh chất lượng cao.
 
 ## Contact
 - Owner: Bùi Minh Tuấn
@@ -22,121 +49,79 @@ export default {
       });
     }
 
-    // Code HTML giao diện web bên dưới...
-  }
-};
-export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
+    // 4. Giao diện trang bán hàng HTML
+    const html = `<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuấn Tech Store | Cửa Hàng Công Nghệ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc; --card-bg: #ffffff; --text: #0f172a; --text-muted: #64748b; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.5; }
+        header { background: var(--card-bg); border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .hero { text-align: center; padding: 3rem 1rem 1.5rem; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .hero p { color: var(--text-muted); font-size: 1rem; }
+        .products-grid { max-width: 1200px; margin: 2rem auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; padding: 0 1.5rem; }
+        .product-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-3px); }
+        .product-img { width: 100%; height: 180px; object-fit: cover; }
+        .product-info { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .product-price { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+        .btn-buy { margin-top: auto; background: var(--primary); color: white; border: none; padding: 0.6rem 1rem; border-radius: 6px; font-weight: 600; text-align: center; text-decoration: none; transition: background 0.2s; }
+        .btn-buy:hover { background: var(--primary-hover); }
+        footer { text-align: center; padding: 2rem; margin-top: 3rem; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">Tuấn Tech Store</a>
+            <span>Hotline: 0900 123 456</span>
+        </div>
+    </header>
+    <section class="hero">
+        <h1>Sản Phẩm Công Nghệ Chính Hãng</h1>
+        <p>Cam kết chất lượng cao – Giao hàng toàn quốc – Bảo hành uy tín</p>
+    </section>
+    <main class="products-grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" class="product-img" alt="Smartphone X">
+            <div class="product-info">
+                <h2 class="product-title">Điện thoại Smartphone X</h2>
+                <div class="product-price">12.990.000 ₫</div>
+                <a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" class="product-img" alt="Laptop Pro">
+            <div class="product-info">
+                <h2 class="product-title">Laptop Văn Phòng Pro</h2>
+                <div class="product-price">18.500.000 ₫</div>
+                <a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" class="product-img" alt="Tai Nghe">
+            <div class="product-info">
+                <h2 class="product-title">Tai Nghe Không Dây</h2>
+                <div class="product-price">2.450.000 ₫</div>
+                <a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
+            </div>
+        </div>
+    </main>
+    <footer>© 2026 Tuấn Tech Store. Bản quyền thuộc về Bùi Minh Tuấn.</footer>
+</body>
+</html>`;
 
-    // Xử lý riêng cho file robots.txt chuẩn
-    if (url.pathname === "/robots.txt") {
-      const robotsTxt = `User-agent: *
-Allow: /
-
-Sitemap: https://buiminhtuan.io.vn/sitemap-index.xml`;
-
-      return new Response(robotsTxt, {
-        headers: { "content-type": "text/plain;charset=UTF-8" },
-      });
-    }
-
-    // Phần code HTML trang bán hàng Tuấn Tech Store của bạn bên dưới...
-    const html = `<!DOCTYPE html>...`;
     return new Response(html, {
       headers: { "content-type": "text/html;charset=UTF-8" },
     });
   },
 };
----
-// --- Phần này là nơi đặt code JavaScript của Astro, bạn hãy để trống nó ---
----
-<!DOCTYPE html>
-<html lang="vi">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Tuấn Tech Store | Cửa Hàng Công Nghệ</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-		<style>
-			:root {
-				--primary: #2563eb;
-				--primary-hover: #1d4ed8;
-				--bg: #f8fafc;
-				--card-bg: #ffffff;
-				--text: #0f172a;
-				--text-muted: #64748b;
-			}
-
-			* { box-sizing: border-box; margin: 0; padding: 0; }
-			body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.5; }
-
-			header { background: var(--card-bg); border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10; }
-			.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-			.logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-
-			.hero { text-align: center; padding: 3rem 1rem 1.5rem; max-width: 800px; margin: 0 auto; }
-			.hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-			.hero p { color: var(--text-muted); font-size: 1rem; }
-
-			.products-grid { max-width: 1200px; margin: 2rem auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; padding: 0 1.5rem; }
-			.product-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; transition: transform 0.2s; }
-			.product-card:hover { transform: translateY(-3px); }
-			.product-img { width: 100%; height: 180px; object-fit: cover; }
-			.product-info { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
-			.product-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-			.product-price { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
-			.btn-buy { margin-top: auto; background: var(--primary); color: white; border: none; padding: 0.6rem 1rem; border-radius: 6px; font-weight: 600; text-align: center; text-decoration: none; transition: background 0.2s; }
-			.btn-buy:hover { background: var(--primary-hover); }
-
-			footer { text-align: center; padding: 2rem; margin-top: 3rem; color: var(--text-muted); border-top: 1px solid #e2e8f0; }
-		</style>
-	</head>
-	<body>
-		<header>
-			<div class="nav-container">
-				<a href="/" class="logo">Tuấn Tech Store</a>
-				<span>Hotline: 0900 123 456</span>
-			</div>
-		</header>
-
-		<section class="hero">
-			<h1>Sản Phẩm Công Nghệ Chính Hãng</h1>
-			<p>Cam kết chất lượng cao – Giao hàng toàn quốc – Bảo hành uy tín</p>
-		</section>
-
-		<main class="products-grid">
-			<div class="product-card">
-				<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" class="product-img" alt="Điện thoại Smartphone X">
-				<div class="product-info">
-					<h2 class="product-title">Điện thoại Smartphone X</h2>
-					<div class="product-price">12.990.000 ₫</div>
-					<a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
-				</div>
-			</div>
-
-			<div class="product-card">
-				<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" class="product-img" alt="Laptop Pro">
-				<div class="product-info">
-					<h2 class="product-title">Laptop Văn Phòng Pro</h2>
-					<div class="product-price">18.500.000 ₫</div>
-					<a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
-				</div>
-			</div>
-
-			<div class="product-card">
-				<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" class="product-img" alt="Tai Nghe Không Dây">
-				<div class="product-info">
-					<h2 class="product-title">Tai Nghe Không Dây</h2>
-					<div class="product-price">2.450.000 ₫</div>
-					<a href="https://zalo.me" target="_blank" class="btn-buy">Mua Ngay</a>
-				</div>
-			</div>
-		</main>
-
-		<footer>
-			<p>© 2026 Tuấn Tech Store. Bản quyền thuộc về Bùi Minh Tuấn.</p>
-		</footer>
-	</body>
-</html>
