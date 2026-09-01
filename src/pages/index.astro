@@ -1,7 +1,4 @@
----
-// src/pages/index.astro
-
-const shopInfo = {
+export const shopInfo = {
   name: "Vyy Lady Store",
   slogan: "Snack Your Style, Chill Your Way",
   hotline: "1900 8280",
@@ -9,7 +6,7 @@ const shopInfo = {
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
-const products = [
+export const products = [
   {
     id: 1,
     name: "Chân gà nguyên xương Vyy Tê Đỉnh 35g",
@@ -91,14 +88,19 @@ const products = [
     desc: "Vị đậm đà béo ngậy chuẩn nội địa Trung, ăn là ghiền."
   }
 ];
----
 
-<!DOCTYPE html>
+export default {
+  async fetch(request, env, ctx) {
+    const html = `<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{shopInfo.name} - {shopInfo.slogan}</title>
+  <title>${shopInfo.name} - ${shopInfo.slogan}</title>
+  
+  <!-- ĐÃ THÊM FAVICON Ở ĐÂY -->
+  <link rel="icon" type="image/png" href="https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn%3AANd9GcT3S21MxC6JkkcuKE_9BJ6156zO4mkdPvz9nSYXbtNc6gpM227PoMGvlnUSt4zSc21FNl2HJRh82Ns4V-W2-BYQgwtXQ92r2EjCXIpmoapUGWY" />
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: #f8fafc; color: #1e293b; display: flex; flex-direction: column; min-height: 100vh; }
@@ -147,16 +149,16 @@ const products = [
 </head>
 <body>
   <div class="top-bar">
-    🚀 Mua sắm dễ dàng tại <strong>{shopInfo.name}</strong> - Hotline: <a href={`tel:${shopInfo.hotline}`}>{shopInfo.hotline}</a>
+    🚀 Mua sắm dễ dàng tại <strong>${shopInfo.name}</strong> - Hotline: <a href="tel:${shopInfo.hotline}">${shopInfo.hotline}</a>
   </div>
 
   <header>
     <div class="header-container">
       <div>
-        <a href="#" class="logo">{shopInfo.name}</a>
-        <div class="slogan">{shopInfo.slogan}</div>
+        <a href="#" class="logo">${shopInfo.name}</a>
+        <div class="slogan">${shopInfo.slogan}</div>
       </div>
-      <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
+      <a href="tel:${shopInfo.hotline}" class="btn-hotline">📞 Hotline: ${shopInfo.hotline}</a>
     </div>
   </header>
 
@@ -170,43 +172,43 @@ const products = [
   <main id="products">
     <div class="section-title">
       <div class="title-bar"></div>
-      Sản Phẩm Nổi Bật ({products.length})
+      Sản Phẩm Nổi Bật (${products.length})
     </div>
     <div class="grid">
-      {products.map((item) => (
+      ${products.map(item => `
         <div class="card">
-          {item.tag && <span class="card-tag">{item.tag}</span>}
+          ${item.tag ? `<span class="card-tag">${item.tag}</span>` : ''}
           <div>
             <div class="card-img-wrap">
-              <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
+              <img src="${item.image}" alt="${item.name}" class="card-img" loading="lazy" />
             </div>
-            <div class="card-category">{item.category}</div>
-            <div class="card-title">{item.name}</div>
-            <div class="card-desc">{item.desc}</div>
+            <div class="card-category">${item.category}</div>
+            <div class="card-title">${item.name}</div>
+            <div class="card-desc">${item.desc}</div>
           </div>
           <div>
             <div class="price-group">
-              <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
-              {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
+              <span class="card-price">${item.price.toLocaleString('vi-VN')}đ</span>
+              ${item.originalPrice ? `<span class="original-price">${item.originalPrice.toLocaleString('vi-VN')}đ</span>` : ''}
             </div>
             <button class="btn-buy">Liên hệ tư vấn</button>
           </div>
         </div>
-      ))}
+      `).join('')}
     </div>
   </main>
 
   <footer>
     <div class="footer-container">
       <div>
-        <div class="footer-title">{shopInfo.name}</div>
-        <div class="footer-text">{shopInfo.slogan}</div>
-        <div class="footer-text">📍 {shopInfo.address}</div>
+        <div class="footer-title">${shopInfo.name}</div>
+        <div class="footer-text">${shopInfo.slogan}</div>
+        <div class="footer-text">📍 ${shopInfo.address}</div>
       </div>
       <div>
         <div style="font-weight:700; margin-bottom:8px;">Hỗ Trợ Khách Hàng</div>
-        <div class="footer-text">☎️ Hotline: <strong style="color:#60a5fa">{shopInfo.hotline}</strong></div>
-        <div class="footer-text">💬 Zalo: {shopInfo.zalo}</div>
+        <div class="footer-text">☎️ Hotline: <strong style="color:#60a5fa">${shopInfo.hotline}</strong></div>
+        <div class="footer-text">💬 Zalo: ${shopInfo.zalo}</div>
       </div>
       <div>
         <div style="font-weight:700; margin-bottom:8px;">Chính Sách</div>
@@ -215,7 +217,13 @@ const products = [
         <div class="footer-text">• Đổi trả trong 7 ngày nếu lỗi từ NSX</div>
       </div>
     </div>
-    <div class="copyright">© 2026 {shopInfo.name}. All rights reserved.</div>
+    <div class="copyright">© 2026 ${shopInfo.name}. All rights reserved.</div>
   </footer>
 </body>
-</html>
+</html>`;
+
+    return new Response(html, {
+      headers: { "content-type": "text/html;charset=UTF-8" },
+    });
+  },
+};
