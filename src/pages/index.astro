@@ -128,30 +128,31 @@ const { shopInfo, products } = await res.json();
       <div class="title-bar"></div>
       Sản Phẩm Nổi Bật ({products?.length || 0})
     </div>
-    <div class="grid">
-      {products && products.map((item) => (
-        <div class="card">
-          <div>
-            <!-- THAY THẾ / SỬA ĐOẠN NÀY VÀO ĐÂY -->
-            <div class="card-img-wrap">
-              {item.tag && <span class="card-tag">{item.tag}</span>}
-              <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
-            </div>
-            
-            <div class="card-category">{item.category}</div>
-            <div class="card-title">{item.name}</div>
-            <div class="card-desc">{item.desc}</div>
-          </div>
-          <div>
-            <div class="price-group">
-              <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
-              {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
-            </div>
-            <button class="btn-buy">Liên hệ tư vấn</button>
-          </div>
+<!-- Trong index.astro -->
+<div class="grid">
+  {products && products.map((item) => (
+    <div class="card">
+      <div>
+        <!-- Sửa lại: Xóa bớt dòng comment thừa "THAY THẾ / SỬA ĐOẠN NÀY VÀO ĐÂY" -->
+        <div class="card-img-wrap">
+          {item.tag && <span class="card-tag">{item.tag}</span>}
+          <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
         </div>
-      ))}
+        
+        <div class="card-category">{item.category}</div>
+        <div class="card-title">{item.name}</div>
+        <div class="card-desc">{item.desc}</div>
+      </div>
+      <div>
+        <div class="price-group">
+          <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
+          {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
+        </div>
+        <button class="btn-buy">Liên hệ tư vấn</button>
+      </div>
     </div>
+  ))}
+</div>
   </main>
 
   <footer>
