@@ -11,6 +11,7 @@ const shopInfo = {
 const products = [
   {
     id: 1,
+    slug: "vyy-te-dinh", // Thêm dòng này cho mỗi sản phẩm
     name: "Chân gà nguyên xương Vyy Tê Đỉnh 35g",
     category: "Chân gà tẩm vị",
     price: 15000,
@@ -196,23 +197,25 @@ const products = [
     <div class="grid">
       {products.map((item) => (
         <div class="card">
-          <div>
-            <div class="card-img-wrap">
-              {item.tag && <span class="card-tag">{item.tag}</span>}
-              <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
-            </div>
-            <div class="card-category">{item.category}</div>
-            <div class="card-title">{item.name}</div>
-            <div class="card-desc">{item.desc}</div>
-          </div>
-          <div>
-            <div class="price-group">
-              <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
-              {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
-            </div>
-            <a href={`https://zalo.me/${shopInfo.zalo}`} target="_blank" rel="noopener noreferrer" class="btn-buy">Liên hệ tư vấn (Zalo)</a>
-          </div>
-        </div>
+  <div>
+    <a href={`/san-pham/${item.slug}`} style="text-decoration: none; color: inherit;">
+      <div class="card-img-wrap">
+        {item.tag && <span class="card-tag">{item.tag}</span>}
+        <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
+      </div>
+      <div class="card-category">{item.category}</div>
+      <div class="card-title">{item.name}</div>
+    </a>
+    <div class="card-desc">{item.desc}</div>
+  </div>
+  <div>
+    <div class="price-group">
+      <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
+      {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
+    </div>
+    <a href={`https://zalo.me/${shopInfo.zalo}`} target="_blank" rel="noopener noreferrer" class="btn-buy">Liên hệ tư vấn (Zalo)</a>
+  </div>
+</div>
       ))}
     </div>
   </main>
