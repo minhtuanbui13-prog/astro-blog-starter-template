@@ -1,96 +1,10 @@
 ---
 // src/pages/index.astro
+import data from '../content/index.js'; // Hoặc đường dẫn import đúng tới file index.js của bạn
 
-const shopInfo = {
-  name: "Vyy Lady Store",
-  slogan: "Snack Your Style, Chill Your Way",
-  hotline: "1900 8280",
-  zalo: "0896443368",
-  address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
-};
-
-const products = [
-  {
-    id: 1,
-    name: "Chân gà nguyên xương Vyy Tê Đỉnh 35g",
-    category: "Chân gà tẩm vị",
-    price: 15000,
-    originalPrice: 18000,
-    tag: "Bán chạy",
-    image: "https://vyylady.com/wp-content/uploads/2025/06/7-300x300.png",
-    desc: "Vị tê cay bùng nổ, giòn sật đậm vị, dành riêng cho team mê cay và thích ăn có gu."
-  },
-  {
-    id: 2,
-    name: "Chân gà không xương Vyy Quốc Dân 26g",
-    category: "Chân gà rút xương",
-    price: 18000,
-    originalPrice: 22000,
-    tag: "Hot item",
-    image: "https://vyylady.com/wp-content/uploads/2025/06/3-1-600x900.png",
-    desc: "Chân gà rút xương vị truyền thống, dễ ăn, đậm đà, chuẩn gu “ai ăn cũng mê."
-  },
-  {
-    id: 3,
-    name: "Chân gà nguyên xương tê cay Vyy Max Chill 50g",
-    category: "Chân gà có xương",
-    price: 22000,
-    originalPrice: 25000,
-    tag: "Mới",
-    image: "https://vyylady.com/wp-content/uploads/2025/07/9-600x900.png",
-    desc: "Chân gà nguyên xương size to, vị tê cay bùng nổ dành cho team mê đậm vị. Càng gặm càng ghiền!."
-  },
-  {
-    id: 4,
-    name: "Chân gà nguyên xương Vyy Đủ Đôi 65g",
-    category: "Chân gà có xương",
-    price: 8000,
-    originalPrice: 10000,
-    tag: "Gợi ý",
-    image: "https://vyylady.com/wp-content/uploads/2025/06/1-600x900.png",
-    desc: "Chân gà nguyên xương 2 chân, bùng nổ dành cho team sợ cô đơn. Càng gặm càng ghiền!."
-  },
-  {
-    id: 5,
-    name: "Chân gà không xương Vyy Chill Nhẹ 26g",
-    category: "Chân gà rút xương",
-    price: 16000,
-    originalPrice: 20000,
-    tag: "Bán chạy",
-    image: "https://vyylady.com/wp-content/uploads/2025/06/5-1-600x900.png",
-    desc: "Chân gà không xương, vị cay ngọt dịu nhẹ, dành riêng cho những ngày cần chill mà không muốn “bung nóc”."
-  },
-  {
-    id: 6,
-    name: "Chân gà Vyy Chanh Tây",
-    category: "Chân gà rút xương",
-    price: 35000,
-    originalPrice: 40000,
-    tag: "Cao cấp",
-    image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-600x822.jpg",
-    desc: "Chân gà rút xương thấm sốt chanh tây chua cay tươi mát, giòn chắc, dễ ăn và cực cuốn."
-  },
-  {
-    id: 7,
-    name: "Quẩy đùi gà phô mai cay 60g",
-    category: "Đồ khô giòn",
-    price: 12000,
-    originalPrice: 15000,
-    tag: "Hot item",
-    image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281292?w=500&q=80",
-    desc: "Hình đùi gà ngộ nghĩnh, lắc bột phô mai béo ngậy mặn ngọt."
-  },
-  {
-    id: 8,
-    name: "Đậu hũ thối Tứ Xuyên đóng gói 45g",
-    category: "Ăn vặt nội địa",
-    price: 14000,
-    originalPrice: 17000,
-    tag: "Mới",
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80",
-    desc: "Vị đậm đà béo ngậy chuẩn nội địa Trung, ăn là ghiền."
-  }
-];
+// Trường hợp file index.js ở cùng thư mục src/pages thì dùng: import data from './index.js';
+// Nếu import lỗi, Astro cũng hỗ trợ lấy trực tiếp data từ file export default:
+const { shopInfo, products } = data || {};
 ---
 
 <!DOCTYPE html>
@@ -98,13 +12,11 @@ const products = [
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{shopInfo.name} - {shopInfo.slogan}</title>
+  <title>{shopInfo?.name} - {shopInfo?.slogan}</title>
 
-  <!-- Favicon chính -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png?v=2" />
   <link rel="shortcut icon" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png?v=2" />
-
-  <!-- Cho các thiết bị Apple (iOS/macOS) -->
   <link rel="apple-touch-icon" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png?v=2" />
 
   <style>
@@ -155,16 +67,16 @@ const products = [
 </head>
 <body>
   <div class="top-bar">
-    🚀 Mua sắm dễ dàng tại <strong>{shopInfo.name}</strong> - Hotline: <a href={`tel:${shopInfo.hotline}`}>{shopInfo.hotline}</a>
+    🚀 Mua sắm dễ dàng tại <strong>{shopInfo?.name}</strong> - Hotline: <a href={`tel:${shopInfo?.hotline}`}>{shopInfo?.hotline}</a>
   </div>
 
   <header>
     <div class="header-container">
       <div>
-        <a href="#" class="logo">{shopInfo.name}</a>
-        <div class="slogan">{shopInfo.slogan}</div>
+        <a href="#" class="logo">{shopInfo?.name}</a>
+        <div class="slogan">{shopInfo?.slogan}</div>
       </div>
-      <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
+      <a href={`tel:${shopInfo?.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo?.hotline}</a>
     </div>
   </header>
 
@@ -178,10 +90,10 @@ const products = [
   <main id="products">
     <div class="section-title">
       <div class="title-bar"></div>
-      Sản Phẩm Nổi Bật ({products.length})
+      Sản Phẩm Nổi Bật ({products?.length || 0})
     </div>
     <div class="grid">
-      {products.map((item) => (
+      {products && products.map((item) => (
         <div class="card">
           {item.tag && <span class="card-tag">{item.tag}</span>}
           <div>
@@ -207,14 +119,14 @@ const products = [
   <footer>
     <div class="footer-container">
       <div>
-        <div class="footer-title">{shopInfo.name}</div>
-        <div class="footer-text">{shopInfo.slogan}</div>
-        <div class="footer-text">📍 {shopInfo.address}</div>
+        <div class="footer-title">{shopInfo?.name}</div>
+        <div class="footer-text">{shopInfo?.slogan}</div>
+        <div class="footer-text">📍 {shopInfo?.address}</div>
       </div>
       <div>
         <div style="font-weight:700; margin-bottom:8px;">Hỗ Trợ Khách Hàng</div>
-        <div class="footer-text">☎️ Hotline: <strong style="color:#60a5fa">{shopInfo.hotline}</strong></div>
-        <div class="footer-text">💬 Zalo: {shopInfo.zalo}</div>
+        <div class="footer-text">☎️ Hotline: <strong style="color:#60a5fa">{shopInfo?.hotline}</strong></div>
+        <div class="footer-text">💬 Zalo: {shopInfo?.zalo}</div>
       </div>
       <div>
         <div style="font-weight:700; margin-bottom:8px;">Chính Sách</div>
@@ -223,7 +135,7 @@ const products = [
         <div class="footer-text">• Đổi trả trong 7 ngày nếu lỗi từ NSX</div>
       </div>
     </div>
-    <div class="copyright">© 2026 {shopInfo.name}. All rights reserved.</div>
+    <div class="copyright">© 2026 {shopInfo?.name}. All rights reserved.</div>
   </footer>
 </body>
 </html>
