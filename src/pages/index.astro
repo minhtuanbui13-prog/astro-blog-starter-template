@@ -4,7 +4,7 @@ const shopInfo = {
   name: "Vyy Lady Store",
   slogan: "Snack Your Style, Chill Your Way",
   hotline: "1900 8280",
-  zalo: "0896443368",
+  zalo: "0896443368", // Thêm dòng này
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
@@ -196,7 +196,7 @@ const products = [
               <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
               {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
             </div>
-            <button class="btn-buy">Liên hệ tư vấn</button>
+            <a href={`https://zalo.me/${shopInfo.zalo}`} target="_blank" rel="noopener noreferrer" class="btn-buy">Liên hệ tư vấn (Zalo)</a>
           </div>
         </div>
       ))}
