@@ -176,53 +176,86 @@ const products = [
     .footer-text { font-size: 13px; color: #94a3b8; line-height: 1.6; }
     .copyright { background: #020617; text-align: center; padding: 12px; font-size: 12px; color: #64748b; }
 
-/* --- CSS MỚI CHO HERO FULLWIDTH & CHỮ ĐÈ LÊN ẢNH --- */
+/* --- CĂN CHỈNH HERO FULLWIDTH VÀ CHỮ ĐÈ LÊN ẢNH --- */
 .hero-full {
   width: 100%;
-  position: relative; /* Tạo điểm neo để căn chỉnh chữ */
-  line-height: 0;     /* Loại bỏ khoảng trắng thừa dưới ảnh */
-  margin-bottom: 40px; /* Tạo khoảng cách với phần sản phẩm bên dưới */
+  position: relative;
+  line-height: 0;
+  margin-bottom: 40px;
+  overflow: hidden;
 }
 
 .hero-img-wrap {
   width: 100%;
-  height: auto;
 }
 
 .hero-img {
   width: 100%;
-  height: auto;      /* Tự động điều chỉnh chiều cao theo tỷ lệ ảnh */
+  height: auto;
+  min-height: 220px; /* Đảm bảo ảnh luôn có độ cao tối thiểu trên màn hình nhỏ */
   display: block;
   object-fit: cover;
 }
 
 .hero-content-overlay {
-  position: absolute; /* Đặt chữ nằm trên ảnh */
-  top: 50%;           /* Căn giữa theo chiều dọc */
-  left: 50%;          /* Căn giữa theo chiều ngang */
-  transform: translate(-50%, -50%); /* Dịch chuyển chính xác vào giữa */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: white;
-  width: 100%;
-  padding: 20px;
-  z-index: 10;        /* Đảm bảo chữ nằm trên layer ảnh */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Thêm bóng mờ cho chữ để dễ đọc hơn trên ảnh nền */
+  padding: 16px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.25); /* Thêm lớp phủ tối nhẹ giúp chữ nổi bật và sắc nét hơn */
 }
 
-/* Tùy chỉnh lại màu sắc chữ cho phù hợp với nền ảnh (nếu cần) */
 .hero-content-overlay .hero-badge {
-  background: rgba(0, 102, 255, 0.6); /* Badge màu xanh mờ nhẹ */
-  border-color: rgba(255,255,255,0.5);
+  background: rgba(0, 102, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
+
 .hero-content-overlay h2 {
-  font-size: 36px;
-  margin: 12px 0;
+  font-size: clamp(20px, 4vw, 36px); /* Kích thước chữ co giãn linh hoạt theo màn hình */
+  font-weight: 800;
+  margin: 4px 0 8px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
+
 .hero-content-overlay p {
-  color: #ffffff; /* Đổi màu mô tả thành trắng để nổi bật */
-  margin-bottom: 20px;
+  color: #f1f5f9;
+  font-size: clamp(12px, 2vw, 15px);
+  margin-bottom: 16px;
   font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content-overlay .btn-hero {
+  background: #ffffff;
+  color: #0066ff;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 24px;
+  text-decoration: none;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.hero-content-overlay .btn-hero:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
 }
 /* --- KẾT THÚC CSS MỚI --- */
   </style>
