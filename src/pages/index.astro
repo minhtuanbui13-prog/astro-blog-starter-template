@@ -17,7 +17,7 @@ const products = [
     price: 15000,
     originalPrice: 18000,
     tag: "Bán chạy",
-    image: "🍗",
+    image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80",
     desc: "Sốt cay tê thần thánh, chuẩn vị Tứ Xuyên ngấm sâu từng nấc xương."
   },
   {
@@ -27,8 +27,68 @@ const products = [
     price: 18000,
     originalPrice: 22000,
     tag: "Hot item",
-    image: "✨",
+    image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500&q=80",
     desc: "Giòn sần sật, đậm vị ướp thảo mộc thiên nhiên thanh nhẹ."
+  },
+  {
+    id: 3,
+    name: "Cánh gà ngâm ớt xanh Tứ Xuyên 40g",
+    category: "Cánh gà tẩm vị",
+    price: 22000,
+    originalPrice: 25000,
+    tag: "Mới",
+    image: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=500&q=80",
+    desc: "Cánh gà dày thịt, thấm đượm vị cay nồng đặc trưng ớt xanh."
+  },
+  {
+    id: 4,
+    name: "Xúc xích ngô Vyy Lady thơm béo 32g",
+    category: "Ăn vặt nhanh",
+    price: 8000,
+    originalPrice: 10000,
+    tag: "Gợi ý",
+    image: "https://images.unsplash.com/photo-1585325701165-351af916e581?w=500&q=80",
+    desc: "Hạt ngô ngọt bùi quyện cùng thịt xúc xích nướng thơm nức."
+  },
+  {
+    id: 5,
+    name: "Cơm cháy siêu ruốc sốt mắm ớt 50g",
+    category: "Đồ khô giòn",
+    price: 16000,
+    originalPrice: 20000,
+    tag: "Bán chạy",
+    image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=500&q=80",
+    desc: "Cơm cháy giòn rụm, phủ kín chà bông gà cay đậm đà."
+  },
+  {
+    id: 6,
+    name: "Khô bò xé sợi cay nồng 50g",
+    category: "Đặc sản ăn vặt",
+    price: 35000,
+    originalPrice: 40000,
+    tag: "Cao cấp",
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80",
+    desc: "Sợi bò dai mềm, đậm đà gia vị ngũ vị hương và ớt tươi."
+  },
+  {
+    id: 7,
+    name: "Quẩy đùi gà phô mai cay 60g",
+    category: "Đồ khô giòn",
+    price: 12000,
+    originalPrice: 15000,
+    tag: "Hot item",
+    image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281292?w=500&q=80",
+    desc: "Hình đùi gà ngộ nghĩnh, lắc bột phô mai béo ngậy mặn ngọt."
+  },
+  {
+    id: 8,
+    name: "Đậu hũ thối Tứ Xuyên đóng gói 45g",
+    category: "Ăn vặt nội địa",
+    price: 14000,
+    originalPrice: 17000,
+    tag: "Mới",
+    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80",
+    desc: "Vị đậm đà béo ngậy chuẩn nội địa Trung, ăn là ghiền."
   }
 ];
 ---
@@ -63,13 +123,20 @@ const products = [
     .title-bar { width: 8px; height: 20px; background: #0066ff; border-radius: 4px; }
     
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-img { height: 160px; background: #f1f5f9; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin-bottom: 12px; }
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .card-tag { position: absolute; top: 24px; left: 24px; background: #0066ff; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; z-index: 2; }
+    .card-img-wrap { height: 180px; background: #f1f5f9; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .card:hover .card-img { transform: scale(1.05); }
     .card-category { font-size: 11px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
-    .card-title { font-size: 16px; font-weight: 700; margin: 4px 0; color: #0f172a; }
-    .card-desc { font-size: 12px; color: #64748b; margin-bottom: 12px; }
-    .card-price { font-size: 18px; font-weight: 800; color: #0066ff; margin-bottom: 12px; }
-    .btn-buy { background: #0066ff; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    .card-title { font-size: 15px; font-weight: 700; margin: 4px 0; color: #0f172a; line-height: 1.3; }
+    .card-desc { font-size: 12px; color: #64748b; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .price-group { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+    .card-price { font-size: 18px; font-weight: 800; color: #0066ff; }
+    .original-price { font-size: 12px; color: #94a3b8; text-decoration: line-through; }
+    .btn-buy { background: #0066ff; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-buy:hover { background: #0052cc; }
     
     footer { background: #0f172a; color: white; margin-top: 40px; border-top: 3px solid #0066ff; }
     .footer-container { max-width: 1100px; margin: 0 auto; padding: 32px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
@@ -103,19 +170,25 @@ const products = [
   <main id="products">
     <div class="section-title">
       <div class="title-bar"></div>
-      Sản Phẩm Nổi Bật
+      Sản Phẩm Nổi Bật ({products.length})
     </div>
     <div class="grid">
       {products.map((item) => (
         <div class="card">
+          {item.tag && <span class="card-tag">{item.tag}</span>}
           <div>
-            <div class="card-img">{item.image}</div>
+            <div class="card-img-wrap">
+              <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
+            </div>
             <div class="card-category">{item.category}</div>
             <div class="card-title">{item.name}</div>
             <div class="card-desc">{item.desc}</div>
           </div>
           <div>
-            <div class="card-price">{item.price.toLocaleString('vi-VN')}đ</div>
+            <div class="price-group">
+              <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
+              {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
+            </div>
             <button class="btn-buy">Thêm vào giỏ</button>
           </div>
         </div>
@@ -137,8 +210,9 @@ const products = [
       </div>
       <div>
         <div style="font-weight:700; margin-bottom:8px;">Chính Sách</div>
-        <div class="footer-text">• Giao hàng toàn quốc</div>
-        <div class="footer-text">• Kiểm tra trước khi thanh toán</div>
+        <div class="footer-text">• Giao hàng hỏa tốc toàn quốc</div>
+        <div class="footer-text">• Kiểm tra hàng trước khi thanh toán</div>
+        <div class="footer-text">• Đổi trả trong 7 ngày nếu lỗi từ NSX</div>
       </div>
     </div>
     <div class="copyright">© 2026 {shopInfo.name}. All rights reserved.</div>
