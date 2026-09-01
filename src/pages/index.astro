@@ -178,10 +178,14 @@ const products = [
 
 /* --- CĂN CHỈNH HERO RESPONSIVE DÀNH CHO CẢ MOBILE VÀ DESKTOP --- */
 .hero-full {
-  width: 100%;
+  width: 100vw; /* Trải rộng full 100% chiều ngang màn hình điện thoại */
   position: relative;
-  line-height: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw; /* Triệt tiêu hoàn toàn lề trái/phải mặc định của trang */
+  margin-right: -50vw;
   margin-bottom: 30px;
+  line-height: 0;
   overflow: hidden;
 }
 
@@ -192,7 +196,7 @@ const products = [
 
 .hero-img {
   width: 100%;
-  height: 220px; /* Chiều cao cố định vừa vặn trên điện thoại */
+  height: 220px; /* Chiều cao cố định vừa đẹp trên điện thoại */
   display: block;
   object-fit: cover;
   object-position: center;
