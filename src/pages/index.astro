@@ -1,230 +1,141 @@
 ---
-// src/pages/index.astro
-import { shopInfo, products, formatCurrency } from '../data/index.js';
+// Import dữ liệu từ index.js
+import { shopInfo, products } from '../data/index.js';
 ---
 
 <html lang="vi">
   <head>
     <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{shopInfo.name} - Đặt Mua Chân Gà Ngon Chuẩn Vibe</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <title>{shopInfo.name} - {shopInfo.slogan}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              vyyRed: '#E31B23',
+              vyyRedHover: '#C6151C',
+              vyyYellow: '#FFB800',
+              vyyBg: '#FFF8F0',
+            }
+          }
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body class="bg-vyyBg text-gray-900 font-sans min-h-screen flex flex-col">
 
-    <!-- Header & Giỏ hàng -->
-    <header class="header">
-      <div class="container header-flex">
-        <a href="#" class="logo">{shopInfo.name}</a>
-        <div class="header-actions">
-          <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">
-            <i class="fa-solid fa-phone"></i>
-            <span>{shopInfo.hotline}</span>
+    <!-- Header / Navbar -->
+    <header class="bg-vyyRed text-white shadow-md sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-black tracking-wider uppercase">{shopInfo.name}</h1>
+          <p class="text-xs text-yellow-200 hidden sm:block">{shopInfo.slogan}</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href={`tel:${shopInfo.hotline}`} class="bg-vyyYellow text-gray-900 px-3 py-1.5 rounded-full font-bold text-sm hover:bg-yellow-400 transition">
+            📞 Hotline: {shopInfo.hotline}
           </a>
-          <button id="cart-btn" class="btn-cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span id="cart-count">0</span>
-          </button>
         </div>
       </div>
     </header>
 
-    <!-- Hero / Banner -->
-    <section class="hero">
-      <div class="container">
-        <span class="badge">{shopInfo.slogan}</span>
-        <h1>ĂN VẶT CÓ GU – CHILL CỰC ĐÃ</h1>
-        <p>Chân gà tẩm vị siêu cay, siêu to, giòn sần sật. Đặt hàng ngay hôm nay để nhận ưu đãi hời!</p>
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-red-600 to-vyyRed text-white py-12 px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <span class="bg-vyyYellow text-gray-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">
+          Ăn Vặt Đậm Vị - Chill Chuẩn Style
+        </span>
+        <h2 class="text-3xl md:text-5xl font-extrabold mt-4 mb-3">Thế Giới Chân Gà & Đồ Ăn Vặt Vyy Lady</h2>
+        <p class="text-red-100 text-base md:text-lg mb-6">Đậm đà chuẩn vị, giòn ngon sần sật. Giao hàng nhanh chóng tận tay!</p>
+        <a href="#products" class="inline-block bg-vyyYellow text-gray-900 font-bold px-6 py-3 rounded-full hover:bg-yellow-400 transition shadow-lg transform hover:-translate-y-0.5">
+          Khám phá thực đơn 🔥
+        </a>
       </div>
     </section>
 
-    <!-- Danh sách sản phẩm bán hàng -->
-    <section class="section">
-      <div class="container">
-        <h2 class="title">SẢN PHẨM HOT BÁN CHẠY</h2>
-        <div class="product-grid">
-          {products.map((item) => (
-            <div class="product-card">
-              <span class="product-tag">{item.tag}</span>
-              <div class="product-icon">{item.image}</div>
-              <p class="category">{item.category}</p>
-              <h3 class="product-name">{item.name}</h3>
-              <p class="desc">{item.desc}</p>
-              
-              <div class="price-box">
-                <span class="price-current">{formatCurrency(item.price)}</span>
-                <span class="price-old">{formatCurrency(item.originalPrice)}</span>
+    <!-- Product Section -->
+    <main id="products" class="max-w-6xl mx-auto px-4 py-10 flex-grow">
+      <div class="flex items-center justify-between mb-8 border-b-2 border-red-200 pb-3">
+        <h3 class="text-2xl font-bold text-vyyRed flex items-center gap-2">
+          <span>🍗</span> Sản Phẩm Nổi Bật
+        </h3>
+        <span class="text-sm text-gray-500">Chính hãng Vyy Lady</span>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {products.map((item) => (
+          <div class="bg-white rounded-2xl shadow-sm border border-red-100 overflow-hidden hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <!-- Product Image Container -->
+              <div class="h-48 bg-red-50 flex items-center justify-center text-6xl relative">
+                <span>{item.image}</span>
+                {item.tag && (
+                  <span class="absolute top-3 left-3 bg-vyyYellow text-gray-900 font-bold text-xs px-2.5 py-1 rounded-full shadow-sm">
+                    {item.tag}
+                  </span>
+                )}
               </div>
 
-              <button 
-                class="btn-buy add-to-cart-btn" 
-                data-id={item.id}
-                data-name={item.name}
-                data-price={item.price}
-              >
-                <i class="fa-solid fa-plus"></i> Thêm Vào Giỏ
+              <!-- Content -->
+              <div class="p-4">
+                <span class="text-xs text-red-500 font-semibold uppercase tracking-wider">{item.category}</span>
+                <h4 class="font-bold text-gray-800 text-base mt-1 line-clamp-2">{item.name}</h4>
+                <p class="text-gray-500 text-xs mt-2 line-clamp-2">{item.desc}</p>
+              </div>
+            </div>
+
+            <!-- Price & Button -->
+            <div class="p-4 pt-0">
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-vyyRed font-extrabold text-lg">
+                  {item.price.toLocaleString('vi-VN')}đ
+                </span>
+                {item.originalPrice && (
+                  <span class="text-gray-400 text-xs line-through">
+                    {item.originalPrice.toLocaleString('vi-VN')}đ
+                  </span>
+                )}
+              </div>
+              <button class="w-full bg-vyyRed hover:bg-vyyRedHover text-white font-bold py-2 px-4 rounded-xl text-sm transition">
+                Đặt hàng ngay
               </button>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal Giỏ Hàng / Thanh Toán -->
-    <div id="cart-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Giỏ Hàng Của Bạn</h3>
-          <span id="close-modal" class="close">&times;</span>
-        </div>
-        <div id="cart-items" class="cart-items-list">
-          <p class="empty-msg">Chưa có sản phẩm nào trong giỏ.</p>
-        </div>
-        <div class="cart-footer">
-          <div class="total-box">
-            <span>Tổng tiền:</span>
-            <strong id="cart-total">0 đ</strong>
           </div>
-          <button id="checkout-zalo" class="btn-checkout">
-            <i class="fa-solid fa-paper-plane"></i> Gửi Đơn Hàng Qua Zalo
-          </button>
-        </div>
+        ))}
       </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container text-center">
-        <p><strong>{shopInfo.name}</strong> - {shopInfo.address}</p>
-        <p>Hotline hỗ trợ: {shopInfo.hotline}</p>
+    <footer class="bg-gray-900 text-white mt-12 border-t-4 border-vyyRed">
+      <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h4 class="text-lg font-bold text-vyyYellow mb-2">{shopInfo.name}</h4>
+          <p class="text-sm text-gray-400 mb-2">{shopInfo.slogan}</p>
+          <p class="text-sm text-gray-300">📍 Địa chỉ: {shopInfo.address}</p>
+        </div>
+        <div>
+          <h4 class="text-base font-bold mb-2 text-white">Liên Hệ Đặt Hàng</h4>
+          <p class="text-sm text-gray-300">☎️ Hotline: <span class="text-vyyYellow font-bold">{shopInfo.hotline}</span></p>
+          <p class="text-sm text-gray-300">💬 Zalo hỗ trợ: {shopInfo.zalo}</p>
+        </div>
+        <div>
+          <h4 class="text-base font-bold mb-2 text-white">Chính Sách</h4>
+          <ul class="text-sm text-gray-400 space-y-1">
+            <li>• Giao hàng tận nơi toàn quốc</li>
+            <li>• Đảm bảo an toàn vệ sinh thực phẩm</li>
+            <li>• Đổi trả nếu sản phẩm lỗi từ NSX</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-black py-4 text-center text-xs text-gray-500">
+        © 2026 {shopInfo.name}. All rights reserved.
       </div>
     </footer>
 
-    <!-- Script xử lý Client-side (Thêm giỏ hàng & Đặt hàng Zalo) -->
-    <script define:vars={{ zaloNum: shopInfo.zalo }}>
-      let cart = [];
-
-      const cartBtn = document.getElementById('cart-btn');
-      const cartModal = document.getElementById('cart-modal');
-      const closeModal = document.getElementById('close-modal');
-      const cartCount = document.getElementById('cart-count');
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      const checkoutBtn = document.getElementById('checkout-zalo');
-
-      // Mở / Đóng Modal
-      cartBtn.addEventListener('click', () => cartModal.style.display = 'flex');
-      closeModal.addEventListener('click', () => cartModal.style.display = 'none');
-
-      // Bắt sự kiện click Thêm Vào Giỏ
-      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const id = e.target.getAttribute('data-id');
-          const name = e.target.getAttribute('data-name');
-          const price = parseInt(e.target.getAttribute('data-price'));
-
-          const existing = cart.find(i => i.id === id);
-          if (existing) {
-            existing.qty += 1;
-          } else {
-            cart.push({ id, name, price, qty: 1 });
-          }
-          updateCartUI();
-          cartModal.style.display = 'flex';
-        });
-      });
-
-      // Cập nhật giao diện giỏ hàng
-      function updateCartUI() {
-        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-        cartCount.innerText = totalQty;
-        cartTotal.innerText = totalPrice.toLocaleString('vi-VN') + ' đ';
-
-        if (cart.length === 0) {
-          cartItems.innerHTML = '<p class="empty-msg">Chưa có sản phẩm nào trong giỏ.</p>';
-        } else {
-          cartItems.innerHTML = cart.map(item => `
-            <div class="cart-item">
-              <div>
-                <strong>${item.name}</strong>
-                <p>${item.price.toLocaleString('vi-VN')} đ x ${item.qty}</p>
-              </div>
-              <span class="cart-item-price">${(item.price * item.qty).toLocaleString('vi-VN')} đ</span>
-            </div>
-          `).join('');
-        }
-      }
-
-      // Đặt hàng chuyển tiếp sang Zalo
-      checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-          alert('Vui lòng chọn ít nhất 1 sản phẩm!');
-          return;
-        }
-
-        let message = "Chào Shop, tôi muốn đặt hàng:\n";
-        cart.forEach(item => {
-          message += `- ${item.name} (x${item.qty})\n`;
-        });
-        message += `\nTổng tiền: ${cartTotal.innerText}\nNhờ shop tư vấn giao hàng giúp tôi!`;
-
-        const zaloUrl = `https://zalo.me/${zaloNum}?text=${encodeURIComponent(message)}`;
-        window.open(zaloUrl, '_blank');
-      });
-    </script>
   </body>
 </html>
-
-<style>
-  /* CSS Tùy biến bán hàng */
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
-  body { background: #fffdf5; color: #333; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
-
-  /* Header */
-  .header { background: #dc2626; color: white; padding: 12px 0; sticky: top; position: sticky; top: 0; z-index: 100; }
-  .header-flex { display: flex; justify-content: space-between; align-items: center; }
-  .logo { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; font-style: italic; }
-  .header-actions { display: flex; gap: 12px; align-items: center; }
-  .btn-hotline { background: #fbbf24; color: #7f1d1d; padding: 6px 14px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.85rem; }
-  .btn-cart { background: #ffffff; color: #dc2626; border: none; padding: 8px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; display: flex; gap: 6px; align-items: center; }
-  
-  /* Hero */
-  .hero { background: linear-gradient(180deg, #dc2626, #f59e0b); color: white; text-align: center; padding: 50px 16px; }
-  .badge { background: #fef08a; color: #854d0e; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 0.8rem; }
-  .hero h1 { font-size: 2rem; margin: 12px 0; font-weight: 900; }
-
-  /* Product List */
-  .section { padding: 40px 0; }
-  .title { text-align: center; color: #dc2626; margin-bottom: 30px; font-size: 1.6rem; font-weight: 900; }
-  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-  .product-card { background: white; border: 1px solid #fef08a; border-radius: 16px; padding: 16px; position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-  .product-tag { position: absolute; top: 12px; right: 12px; background: #fee2e2; color: #dc2626; font-size: 0.7rem; font-weight: bold; padding: 2px 8px; border-radius: 6px; }
-  .product-icon { font-size: 3rem; text-align: center; margin: 15px 0; }
-  .category { font-size: 0.75rem; color: #888; text-transform: uppercase; }
-  .product-name { font-size: 1.05rem; margin: 4px 0; font-weight: 700; }
-  .desc { font-size: 0.8rem; color: #666; margin-bottom: 12px; }
-  .price-box { margin-bottom: 12px; }
-  .price-current { font-size: 1.2rem; font-weight: 900; color: #dc2626; }
-  .price-old { font-size: 0.85rem; color: #aaa; text-decoration: line-through; margin-left: 6px; }
-  .btn-buy { background: #dc2626; color: white; border: none; width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-  .btn-buy:hover { background: #b91c1c; }
-
-  /* Modal Cart */
-  .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-  .modal-content { background: white; width: 90%; max-width: 450px; border-radius: 16px; padding: 20px; }
-  .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-  .close { font-size: 1.5rem; cursor: pointer; }
-  .cart-items-list { max-height: 250px; overflow-y: auto; margin: 15px 0; }
-  .cart-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 0.9rem; }
-  .empty-msg { text-align: center; color: #888; padding: 20px 0; }
-  .cart-footer { border-top: 1px solid #eee; padding-top: 12px; }
-  .total-box { display: flex; justify-content: space-between; font-size: 1.1rem; margin-bottom: 12px; }
-  .btn-checkout { background: #0088ff; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
-
-  /* Footer */
-  .footer { background: #111; color: #aaa; padding: 20px 0; font-size: 0.85rem; margin-top: 40px; }
-  .text-center { text-align: center; }
-</style>
