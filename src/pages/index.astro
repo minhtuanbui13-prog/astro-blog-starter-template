@@ -1,1 +1,147 @@
+---
+// src/pages/index.astro
 
+const shopInfo = {
+  name: "Vyy Lady Store",
+  slogan: "Snack Your Style, Chill Your Way",
+  hotline: "1900 8280",
+  zalo: "0900000000",
+  address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
+};
+
+const products = [
+  {
+    id: 1,
+    name: "Chân gà nguyên xương Vyy Tê Đỉnh 35g",
+    category: "Chân gà tẩm vị",
+    price: 15000,
+    originalPrice: 18000,
+    tag: "Bán chạy",
+    image: "🍗",
+    desc: "Sốt cay tê thần thánh, chuẩn vị Tứ Xuyên ngấm sâu từng nấc xương."
+  },
+  {
+    id: 2,
+    name: "Chân gà không xương Vyy Quốc Dân 26g",
+    category: "Chân gà rút xương",
+    price: 18000,
+    originalPrice: 22000,
+    tag: "Hot item",
+    image: "✨",
+    desc: "Giòn sần sật, đậm vị ướp thảo mộc thiên nhiên thanh nhẹ."
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{shopInfo.name} - {shopInfo.slogan}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f8fafc; color: #1e293b; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    .top-bar { background: #0f172a; color: #fff; font-size: 12px; padding: 8px; text-align: center; }
+    .top-bar a { color: #facc15; font-weight: bold; text-decoration: underline; }
+    
+    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
+    .header-container { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { color: #0066ff; font-size: 22px; font-weight: 900; text-transform: uppercase; text-decoration: none; }
+    .slogan { font-size: 12px; color: #64748b; }
+    .btn-hotline { background: #0066ff; color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px; text-decoration: none; }
+    
+    .hero { background: linear-gradient(135deg, #2563eb, #0066ff); color: white; padding: 48px 16px; text-align: center; }
+    .hero-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); }
+    .hero h2 { font-size: 32px; font-weight: 800; margin: 16px 0 8px; }
+    .hero p { color: #dbeafe; margin-bottom: 24px; }
+    .btn-hero { background: #ffffff; color: #0066ff; font-weight: 700; padding: 12px 24px; border-radius: 24px; text-decoration: none; display: inline-block; }
+    
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 16px; flex-grow: 1; width: 100%; }
+    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .title-bar { width: 8px; height: 20px; background: #0066ff; border-radius: 4px; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-img { height: 160px; background: #f1f5f9; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin-bottom: 12px; }
+    .card-category { font-size: 11px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
+    .card-title { font-size: 16px; font-weight: 700; margin: 4px 0; color: #0f172a; }
+    .card-desc { font-size: 12px; color: #64748b; margin-bottom: 12px; }
+    .card-price { font-size: 18px; font-weight: 800; color: #0066ff; margin-bottom: 12px; }
+    .btn-buy { background: #0066ff; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    
+    footer { background: #0f172a; color: white; margin-top: 40px; border-top: 3px solid #0066ff; }
+    .footer-container { max-width: 1100px; margin: 0 auto; padding: 32px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .footer-title { color: #0066ff; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
+    .footer-text { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+    .copyright { background: #020617; text-align: center; padding: 12px; font-size: 12px; color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    🚀 Mua sắm dễ dàng tại <strong>{shopInfo.name}</strong> - Hotline: <a href={`tel:${shopInfo.hotline}`}>{shopInfo.hotline}</a>
+  </div>
+
+  <header>
+    <div class="header-container">
+      <div>
+        <a href="#" class="logo">{shopInfo.name}</a>
+        <div class="slogan">{shopInfo.slogan}</div>
+      </div>
+      <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="hero-badge">Trải Nghiệm Mua Sắm Chuẩn Style</span>
+    <h2>Thế Giới Snack & Ăn Vặt Vyy Lady</h2>
+    <p>Chất lượng cao cấp - Hương vị đậm đà - Giao hàng cực nhanh.</p>
+    <a href="#products" class="btn-hero">Xem danh mục sản phẩm 👇</a>
+  </section>
+
+  <main id="products">
+    <div class="section-title">
+      <div class="title-bar"></div>
+      Sản Phẩm Nổi Bật
+    </div>
+    <div class="grid">
+      {products.map((item) => (
+        <div class="card">
+          <div>
+            <div class="card-img">{item.image}</div>
+            <div class="card-category">{item.category}</div>
+            <div class="card-title">{item.name}</div>
+            <div class="card-desc">{item.desc}</div>
+          </div>
+          <div>
+            <div class="card-price">{item.price.toLocaleString('vi-VN')}đ</div>
+            <button class="btn-buy">Thêm vào giỏ</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="footer-title">{shopInfo.name}</div>
+        <div class="footer-text">{shopInfo.slogan}</div>
+        <div class="footer-text">📍 {shopInfo.address}</div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:8px;">Hỗ Trợ Khách Hàng</div>
+        <div class="footer-text">☎️ Hotline: <strong style="color:#60a5fa">{shopInfo.hotline}</strong></div>
+        <div class="footer-text">💬 Zalo: {shopInfo.zalo}</div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:8px;">Chính Sách</div>
+        <div class="footer-text">• Giao hàng toàn quốc</div>
+        <div class="footer-text">• Kiểm tra trước khi thanh toán</div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 {shopInfo.name}. All rights reserved.</div>
+  </footer>
+</body>
+</html>
