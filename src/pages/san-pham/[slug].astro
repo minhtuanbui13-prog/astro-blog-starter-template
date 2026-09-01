@@ -280,28 +280,58 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
 
     /* Phần Sản phẩm tương tự */
     .section-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
-    .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    @media (max-width: 768px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
+.related-grid { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); /* Đổi sang hiển thị 2 cột to bản trên máy tính hoặc tùy chỉnh */
+  gap: 20px; 
+}
+@media (min-width: 768px) {
+  .related-grid { 
+    grid-template-columns: repeat(4, 1fr); /* Vẫn giữ 4 cột nhưng mở rộng không gian cho mỗi card */
+  }
+}
 
-    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    .card-img-wrap { 
+.card { 
+  background: #ffffff; 
+  border: 1px solid #e2e8f0; 
+  border-radius: 16px; 
+  padding: 16px; /* Tăng padding của khung thẻ để card trông to và dày dặn hơn */
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  text-decoration: none; 
+  color: inherit; 
+  transition: transform 0.2s, box-shadow 0.2s; 
+}
+
+.card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08); 
+}
+
+.card-img-wrap { 
   width: 100%; 
-  aspect-ratio: 1/1; 
+  aspect-ratio: 1 / 1; /* Giữ khung hình vuông chuẩn */
   background: #f8fafc; 
-  border-radius: 8px; 
+  border-radius: 12px; 
   overflow: hidden; 
   display: flex; 
-  align-items: center;    /* Căn giữa theo chiều dọc (tạo lề trên và dưới) */
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  padding: 12px;           /* Tạo khoảng lề vừa vặn xung quanh ảnh */
-  margin-bottom: 10px; 
+  align-items: center;    
+  justify-content: center; 
+  padding: 16px; /* Tăng khoảng đệm để ảnh bên trong vừa vặn, không bị sát viền */
+  margin-bottom: 14px; 
+  border: 1px solid #f1f5f9;
 }
 
 .card-img { 
   max-width: 100%;       
   max-height: 100%;      
-  object-fit: contain;   /* Giữ nguyên tỷ lệ chuẩn, không bị méo hình */
+  object-fit: contain;   /* Giữ tỷ lệ ảnh chuẩn, không bị méo */
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi rê chuột vào ảnh */
 }
     .card-title { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .card-price { font-size: 15px; font-weight: 800; color: #0066ff; }
