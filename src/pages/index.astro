@@ -1,9 +1,7 @@
 ---
 // src/pages/index.astro
-import data from '../content/index.js'; // Hoặc đường dẫn import đúng tới file index.js của bạn
+import data from '../content/index.js';
 
-// Trường hợp file index.js ở cùng thư mục src/pages thì dùng: import data from './index.js';
-// Nếu import lỗi, Astro cũng hỗ trợ lấy trực tiếp data từ file export default:
 const { shopInfo, products } = data || {};
 ---
 
@@ -43,29 +41,29 @@ const { shopInfo, products } = data || {};
     .title-bar { width: 8px; height: 20px; background: #0066ff; border-radius: 4px; }
     
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-   /* CSS mới giúp hiển thị trọn vẹn full ảnh */
-.card-img-wrap { 
-  height: 220px; 
-  background: #ffffff; 
-  border-radius: 8px; 
-  overflow: hidden; 
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-img { 
-  max-width: 100%; 
-  max-height: 100%; 
-  object-fit: contain; /* Giữ nguyên tỉ lệ, hiển thị full toàn bộ ảnh */
-  transition: transform 0.3s; 
-}
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
     .card-tag { position: absolute; top: 24px; left: 24px; background: #0066ff; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; z-index: 2; }
-    .card-img-wrap { height: 180px; background: #f1f5f9; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
-    .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    
+    /* Khung hiển thị full ảnh */
+    .card-img-wrap { 
+      height: 220px; 
+      background: #ffffff; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-img { 
+      max-width: 100%; 
+      max-height: 100%; 
+      object-fit: contain; 
+      transition: transform 0.3s; 
+    }
     .card:hover .card-img { transform: scale(1.05); }
+
     .card-category { font-size: 11px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
     .card-title { font-size: 15px; font-weight: 700; margin: 4px 0; color: #0f172a; line-height: 1.3; }
     .card-desc { font-size: 12px; color: #64748b; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
