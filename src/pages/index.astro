@@ -1,11 +1,7 @@
 ---
-// src/pages/index.astro
-
-// Gọi dữ liệu trực tiếp từ Cloudflare Worker của bạn
-const response = await fetch('https://astro-blog-starter-template.minhtuan-bui13.workers.dev/');
-const data = await response.json();
-
-const { shopInfo, products } = data || {};
+// Fetch trực tiếp từ Worker của bạn
+const res = await fetch('https://astro-blog-starter-template.minhtuan-bui13.workers.dev/');
+const { shopInfo, products } = await res.json();
 ---
 
 <!DOCTYPE html>
