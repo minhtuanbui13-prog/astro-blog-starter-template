@@ -176,25 +176,25 @@ const products = [
     .footer-text { font-size: 13px; color: #94a3b8; line-height: 1.6; }
     .copyright { background: #020617; text-align: center; padding: 12px; font-size: 12px; color: #64748b; }
 
-/* --- CĂN CHỈNH HERO BANNER HIỂN THỊ ĐẦY ĐỦ TRÊN ĐIỆN THOẠI --- */
+/* --- CĂN CHỈNH HERO BANNER HIỂN THỊ ĐẦY ĐỦ VÀ CHUẨN GIỮA --- */
 .hero-full {
   width: 100%;
   position: relative;
   line-height: 0;
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
   overflow: hidden;
 }
 
 .hero-img-wrap {
   width: 100%;
-  background: #000;
+  background: transparent;
 }
 
 .hero-img {
   width: 100%;
-  height: auto; /* Để chiều cao tự động co giãn theo tỉ lệ ảnh */
+  height: auto; /* Giữ đúng tỷ lệ ảnh gốc, không bị xén lề hai bên */
   display: block;
-  object-fit: contain; /* Đảm bảo hiển thị trọn vẹn 100% chiều ngang banner */
+  object-fit: cover;
   object-position: center;
 }
 
@@ -262,9 +262,6 @@ const products = [
 
 /* Cấu hình riêng khi xem trên máy tính (Desktop) */
 @media (min-width: 768px) {
-  .hero-img {
-    height: 320px; /* Tự động mở rộng chiều cao trên máy tính */
-  }
   .hero-content-overlay {
     padding: 20px;
   }
@@ -285,6 +282,7 @@ const products = [
   }
 }
 /* --- KẾT THÚC CSS MỚI --- */
+
   </style>
 </head>
 <body>
