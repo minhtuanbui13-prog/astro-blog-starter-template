@@ -118,14 +118,74 @@ const products = [
   font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
 }
     
-    .top-bar { background: #0f172a; color: #fff; font-size: 12px; padding: 8px; text-align: center; }
-    .top-bar a { color: #facc15; font-weight: bold; text-decoration: underline; }
-    
-    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
-    .header-container { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { color: #0066ff; font-size: 22px; font-weight: 900; text-transform: uppercase; text-decoration: none; }
-    .slogan { font-size: 12px; color: #64748b; }
-    .btn-hotline { background: #0066ff; color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 14px; text-decoration: none; }
+/* --- TỐI ƯU CĂN CHỈNH 1 HÀNG CHO TOP-BAR VÀ HEADER --- */
+.top-bar { 
+  background: #0f172a; 
+  color: #fff; 
+  font-size: clamp(9px, 2.5vw, 12px); /* Tự động thu nhỏ cỡ chữ vừa khít màn hình di động */
+  padding: 6px 8px; 
+  text-align: center; 
+  white-space: nowrap; /* Bắt buộc top-bar nằm trên 1 hàng */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top-bar a { 
+  color: #facc15; 
+  font-weight: bold; 
+  text-decoration: underline; 
+}
+
+header { 
+  background: #ffffff; 
+  border-bottom: 1px solid #e2e8f0; 
+  position: sticky; 
+  top: 0; 
+  z-index: 50; 
+}
+.header-container { 
+  max-width: 1100px; 
+  margin: 0 auto; 
+  padding: 8px 12px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 8px; /* Tạo khoảng cách an toàn giữa Logo và Hotline */
+}
+
+/* Khung chứa Logo + Slogan trên cùng 1 hàng */
+.header-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap; /* Bắt buộc Logo và Slogan giữ nguyên 1 hàng */
+}
+
+.logo { 
+  color: #0066ff; 
+  font-size: clamp(14px, 4vw, 22px); /* Thu nhỏ linh hoạt trên di động */
+  font-weight: 900; 
+  text-transform: uppercase; 
+  text-decoration: none; 
+  white-space: nowrap;
+}
+
+.slogan { 
+  font-size: clamp(9px, 2.2vw, 12px); 
+  color: #64748b; 
+  white-space: nowrap; /* Giữ Slogan không bị xuống dòng */
+}
+
+.btn-hotline { 
+  background: #0066ff; 
+  color: #fff; 
+  padding: 6px 12px; 
+  border-radius: 20px; 
+  font-weight: 600; 
+  font-size: clamp(10px, 2.5vw, 14px); 
+  text-decoration: none; 
+  white-space: nowrap; /* Bắt buộc nút Hotline nằm gọn trên 1 hàng */
+  flex-shrink: 0; /* Giữ nút Hotline không bị méo/co lại */
+}
     
     .hero { background: linear-gradient(135deg, #2563eb, #0066ff); color: white; padding: 48px 16px; text-align: center; }
     .hero-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); }
@@ -286,15 +346,15 @@ const products = [
     🚀 Mua sắm dễ dàng tại <strong>{shopInfo.name}</strong> - Hotline: <a href={`tel:${shopInfo.hotline}`}>{shopInfo.hotline}</a>
   </div>
 
-  <header>
-    <div class="header-container">
-      <div>
-        <a href="#" class="logo">{shopInfo.name}</a>
-        <div class="slogan">{shopInfo.slogan}</div>
-      </div>
-      <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
+<header>
+  <div class="header-container">
+    <div class="header-brand">
+      <a href="#" class="logo">{shopInfo.name}</a>
+      <span class="slogan">- {shopInfo.slogan}</span>
     </div>
-  </header>
+    <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
+  </div>
+</header>
 
 <section class="hero-full">
   <div class="hero-img-wrap">
