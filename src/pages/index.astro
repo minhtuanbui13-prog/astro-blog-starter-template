@@ -141,8 +141,22 @@ const products = [
     .price-group { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
     .card-price { font-size: 18px; font-weight: 800; color: #0066ff; }
     .original-price { font-size: 12px; color: #94a3b8; text-decoration: line-through; }
-    .btn-buy { background: #0066ff; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-    .btn-buy:hover { background: #0052cc; }
+.btn-buy { 
+  background: #0066ff; 
+  color: white; 
+  text-align: center; 
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 8px; 
+  font-weight: 600; 
+  text-decoration: none; /* Giúp bỏ gạch chân */
+  display: flex;         /* Chuyển thành flex để căn giữa chuẩn hơn */
+  align-items: center;   /* Canh giữa theo chiều dọc */
+  justify-content: center; /* Canh giữa theo chiều ngang */
+  gap: 6px;              /* Khoảng cách giữa chữ và icon (nếu có) */
+  transition: background 0.2s; 
+}
+.btn-buy:hover { background: #0052cc; }
     
     footer { background: #0f172a; color: white; margin-top: 40px; border-top: 3px solid #0066ff; }
     .footer-container { max-width: 1100px; margin: 0 auto; padding: 32px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
