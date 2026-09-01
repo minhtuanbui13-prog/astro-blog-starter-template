@@ -1,426 +1,230 @@
 ---
 // src/pages/index.astro
-const navLinks = [
-  { name: 'TRANG CHỦ', href: '#' },
-  { name: 'VỀ CHÚNG TÔI', href: 'https://vyylady.com/ve-chung-toi/' },
-  { name: 'SẢN PHẨM', href: 'https://vyylady.com/san-pham/' },
-  { name: 'ĐỈNH CHÓP', href: 'url?id=4' },
-  { name: 'MẸO HAY', href: 'url?id=5' },
-  { name: 'TIN TỨC', href: 'https://vyylady.com/tin-tuc/' },
-];
-
-const products = [
-  {
-    name: 'Chân gà nguyên xương Vyy Tê Đỉnh 35g',
-    category: 'VYY LADY',
-    tag: 'Tê Cay',
-    url: 'https://vyylady.com/san-pham/chan-ga-nguyen-xuong-vyy-te-dinh-35g/'
-  },
-  {
-    name: 'Chân gà không xương Vyy Quốc dân 26g',
-    category: 'VYY LADY',
-    tag: 'Rút Xương',
-    url: 'https://vyylady.com/san-pham/chan-ga-khong-xuong-vyy-quoc-dan-26g/'
-  },
-  {
-    name: 'Chân gà nguyên xương tê cay Vyy Max Chill 50g',
-    category: 'VYY LADY',
-    tag: 'Size Khủng',
-    url: 'https://vyylady.com/san-pham/chan-ga-nguyen-xuong-vyy-max-chill-50g/'
-  },
-  {
-    name: 'Chân gà nguyên xương Vyy Đủ Đôi 65g',
-    category: 'VYY LADY',
-    tag: 'Đủ Đôi',
-    url: 'https://vyylady.com/san-pham/chan-ga-nguyen-xuong-vyy-du-doi-65g/'
-  },
-  {
-    name: 'Chân gà không xương Vyy Chill Nhẹ 26g',
-    category: 'VYY LADY',
-    tag: 'Vị Dịu',
-    url: 'https://vyylady.com/san-pham/chan-ga-khong-xuong-vyy-chill-nhe-26g/'
-  },
-  {
-    name: 'Chân gà Vyy Chanh Tây',
-    category: 'CHÂN GÀ SỐT',
-    tag: 'Sốt Chanh',
-    url: 'https://vyylady.com/san-pham/chan-ga-vyy-chanh-tay/'
-  }
-];
-
-const reviews = [
-  {
-    name: "Trần Minh Anh",
-    text: "Vyy Chill Nhẹ đúng kiểu dành cho mấy hôm muốn ăn vặt mà không drama vị giác. Vị dịu nhẹ, thơm thơm, kiểu 'ăn là thấy dễ chịu trong lòng'."
-  },
-  {
-    name: "Nguyễn Anh Tú",
-    text: "Mình là đứa mê cay nên thấy cái tên 'Tê Đỉnh' là chốt đơn liền. Mở gói ra thơm nức mũi, cắn phát tê thật, đã thật nhưng không bị gắt."
-  },
-  {
-    name: "Hoàng Việt Anh",
-    text: "Không đùa chứ mở gói ra thấy cái chân là 'ú òa' thiệt, to gì đâu mà to! Gia vị thì ngấm đều, ăn vừa đậm vừa sướng miệng."
-  }
-];
+import { shopInfo, products, formatCurrency } from '../data/index.js';
 ---
 
 <html lang="vi">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vyy Lady - Snack Your Style, Chill Your Way</title>
+    <title>{shopInfo.name} - Đặt Mua Chân Gà Ngon Chuẩn Vibe</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
 
-    <!-- Navigation Header -->
+    <!-- Header & Giỏ hàng -->
     <header class="header">
-      <div class="container header-container">
-        <a href="url?id=1" class="logo">VyyLady</a>
-        <nav class="nav">
-          {navLinks.map((link) => (
-            <a href={link.href}>{link.name}</a>
-          ))}
-        </nav>
-        <a href="tel:19008280" class="btn-hotline">
-          <i class="fa-solid fa-phone"></i>
-          <span>1900 8280</span>
-        </a>
+      <div class="container header-flex">
+        <a href="#" class="logo">{shopInfo.name}</a>
+        <div class="header-actions">
+          <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">
+            <i class="fa-solid fa-phone"></i>
+            <span>{shopInfo.hotline}</span>
+          </a>
+          <button id="cart-btn" class="btn-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count">0</span>
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero / Banner -->
     <section class="hero">
       <div class="container">
-        <span class="badge">Snack Your Style</span>
-        <h1>CHÂN GÀ VYY LADY</h1>
-        <p>Khám phá các món chân gà siêu cay – to – chất cùng Vyy Lady! Chill cực đã, chọn ngay vị gu của bạn!</p>
+        <span class="badge">{shopInfo.slogan}</span>
+        <h1>ĂN VẶT CÓ GU – CHILL CỰC ĐÃ</h1>
+        <p>Chân gà tẩm vị siêu cay, siêu to, giòn sần sật. Đặt hàng ngay hôm nay để nhận ưu đãi hời!</p>
       </div>
     </section>
 
-    <!-- Product Section -->
+    <!-- Danh sách sản phẩm bán hàng -->
     <section class="section">
       <div class="container">
-        <div class="section-title">
-          <h2>Danh Mục Sản Phẩm</h2>
-          <p>Đủ chill chưa? Có size khủng, có cay bung nóc, có chill nhẹ nhàng!</p>
-        </div>
-
+        <h2 class="title">SẢN PHẨM HOT BÁN CHẠY</h2>
         <div class="product-grid">
           {products.map((item) => (
             <div class="product-card">
-              <div class="product-img">🍗</div>
-              <div class="product-tags">
-                <span class="category">{item.category}</span>
-                <span class="tag">{item.tag}</span>
+              <span class="product-tag">{item.tag}</span>
+              <div class="product-icon">{item.image}</div>
+              <p class="category">{item.category}</p>
+              <h3 class="product-name">{item.name}</h3>
+              <p class="desc">{item.desc}</p>
+              
+              <div class="price-box">
+                <span class="price-current">{formatCurrency(item.price)}</span>
+                <span class="price-old">{formatCurrency(item.originalPrice)}</span>
               </div>
-              <h3><a href={item.url}>{item.name}</a></h3>
-              <a href={item.url} class="btn-detail">Xem Chi Tiết</a>
+
+              <button 
+                class="btn-buy add-to-cart-btn" 
+                data-id={item.id}
+                data-name={item.name}
+                data-price={item.price}
+              >
+                <i class="fa-solid fa-plus"></i> Thêm Vào Giỏ
+              </button>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Quality Standards -->
-    <section class="section bg-white border-y">
-      <div class="container">
-        <div class="section-title">
-          <h2>Chân Gà Cực "Xịn Xò"</h2>
+    <!-- Modal Giỏ Hàng / Thanh Toán -->
+    <div id="cart-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Giỏ Hàng Của Bạn</h3>
+          <span id="close-modal" class="close">&times;</span>
         </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <i class="fa-solid fa-flag"></i>
-            <h3>Thương Hiệu Việt Nam</h3>
-            <p>Dành riêng cho gu ăn vặt của giới trẻ Việt.</p>
+        <div id="cart-items" class="cart-items-list">
+          <p class="empty-msg">Chưa có sản phẩm nào trong giỏ.</p>
+        </div>
+        <div class="cart-footer">
+          <div class="total-box">
+            <span>Tổng tiền:</span>
+            <strong id="cart-total">0 đ</strong>
           </div>
-          <div class="feature-card">
-            <i class="fa-solid fa-certificate"></i>
-            <h3>Chứng Nhận ISO</h3>
-            <p>Đạt chuẩn quốc tế, an toàn và minh bạch.</p>
-          </div>
-          <div class="feature-card">
-            <i class="fa-solid fa-recycle"></i>
-            <h3>Bao Bì Tái Chế</h3>
-            <p>Gọn nhẹ và thân thiện với môi trường.</p>
-          </div>
-          <div class="feature-card">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Xử Lý Khử Khuẩn</h3>
-            <p>Công nghệ hiện đại tiêu diệt vi sinh vật.</p>
-          </div>
+          <button id="checkout-zalo" class="btn-checkout">
+            <i class="fa-solid fa-paper-plane"></i> Gửi Đơn Hàng Qua Zalo
+          </button>
         </div>
       </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section class="section">
-      <div class="container">
-        <div class="section-title">
-          <h2>Cảm Nhận Từ Chillers</h2>
-        </div>
-        <div class="reviews-grid">
-          {reviews.map((review) => (
-            <div class="review-card">
-              <p class="review-text">"{review.text}"</p>
-              <p class="review-author">— {review.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <h3 class="footer-logo">Vyy Lady</h3>
-          <p class="footer-sub">Không phải snack mà là style - Ăn là phải có gu!</p>
-          <div class="contact-info">
-            <p><i class="fa-solid fa-location-dot"></i> Số 12 Ngách 84 Ngõ 318 Đê La Thành, Ô Chợ Dừa, Hà Nội</p>
-            <p><i class="fa-solid fa-building"></i> Amber Riverside, 622 Minh Khai, Vĩnh Tuy, Hà Nội</p>
-            <p><i class="fa-solid fa-envelope"></i> hello@vyylady.com</p>
-          </div>
-        </div>
-        <div>
-          <h4>Follow Vyy Lady ngay tại:</h4>
-          <div class="social-links">
-            <a href="https://vyylady.com/"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://vyylady.com/"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://vyylady.com/"><i class="fa-solid fa-phone"></i></a>
-          </div>
-          <p class="copyright">Copyright 2026 © Vyy Lady. Powered by Astro.</p>
-        </div>
+      <div class="container text-center">
+        <p><strong>{shopInfo.name}</strong> - {shopInfo.address}</p>
+        <p>Hotline hỗ trợ: {shopInfo.hotline}</p>
       </div>
     </footer>
 
+    <!-- Script xử lý Client-side (Thêm giỏ hàng & Đặt hàng Zalo) -->
+    <script define:vars={{ zaloNum: shopInfo.zalo }}>
+      let cart = [];
+
+      const cartBtn = document.getElementById('cart-btn');
+      const cartModal = document.getElementById('cart-modal');
+      const closeModal = document.getElementById('close-modal');
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      const checkoutBtn = document.getElementById('checkout-zalo');
+
+      // Mở / Đóng Modal
+      cartBtn.addEventListener('click', () => cartModal.style.display = 'flex');
+      closeModal.addEventListener('click', () => cartModal.style.display = 'none');
+
+      // Bắt sự kiện click Thêm Vào Giỏ
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.getAttribute('data-id');
+          const name = e.target.getAttribute('data-name');
+          const price = parseInt(e.target.getAttribute('data-price'));
+
+          const existing = cart.find(i => i.id === id);
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            cart.push({ id, name, price, qty: 1 });
+          }
+          updateCartUI();
+          cartModal.style.display = 'flex';
+        });
+      });
+
+      // Cập nhật giao diện giỏ hàng
+      function updateCartUI() {
+        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+        cartCount.innerText = totalQty;
+        cartTotal.innerText = totalPrice.toLocaleString('vi-VN') + ' đ';
+
+        if (cart.length === 0) {
+          cartItems.innerHTML = '<p class="empty-msg">Chưa có sản phẩm nào trong giỏ.</p>';
+        } else {
+          cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item">
+              <div>
+                <strong>${item.name}</strong>
+                <p>${item.price.toLocaleString('vi-VN')} đ x ${item.qty}</p>
+              </div>
+              <span class="cart-item-price">${(item.price * item.qty).toLocaleString('vi-VN')} đ</span>
+            </div>
+          `).join('');
+        }
+      }
+
+      // Đặt hàng chuyển tiếp sang Zalo
+      checkoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+          alert('Vui lòng chọn ít nhất 1 sản phẩm!');
+          return;
+        }
+
+        let message = "Chào Shop, tôi muốn đặt hàng:\n";
+        cart.forEach(item => {
+          message += `- ${item.name} (x${item.qty})\n`;
+        });
+        message += `\nTổng tiền: ${cartTotal.innerText}\nNhờ shop tư vấn giao hàng giúp tôi!`;
+
+        const zaloUrl = `https://zalo.me/${zaloNum}?text=${encodeURIComponent(message)}`;
+        window.open(zaloUrl, '_blank');
+      });
+    </script>
   </body>
 </html>
 
 <style>
-  /* Base Style */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-  body {
-    background-color: #fffbeb;
-    color: #1f2937;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
+  /* CSS Tùy biến bán hàng */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
+  body { background: #fffdf5; color: #333; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 
   /* Header */
-  .header {
-    background-color: #dc2626;
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-  }
-  .logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    font-style: italic;
-  }
-  .nav {
-    display: flex;
-    gap: 20px;
-  }
-  .nav a {
-    font-weight: 700;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-  .nav a:hover {
-    color: #fcd34d;
-  }
-  .btn-hotline {
-    background-color: #fbbf24;
-    color: #7f1d1d;
-    font-weight: 800;
-    padding: 8px 16px;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.875rem;
-  }
-
+  .header { background: #dc2626; color: white; padding: 12px 0; sticky: top; position: sticky; top: 0; z-index: 100; }
+  .header-flex { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; font-style: italic; }
+  .header-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-hotline { background: #fbbf24; color: #7f1d1d; padding: 6px 14px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.85rem; }
+  .btn-cart { background: #ffffff; color: #dc2626; border: none; padding: 8px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; display: flex; gap: 6px; align-items: center; }
+  
   /* Hero */
-  .hero {
-    background: linear-gradient(180deg, #dc2626 0%, #f59e0b 100%);
-    color: white;
-    text-align: center;
-    padding: 60px 16px;
-  }
-  .badge {
-    background-color: #fbbf24;
-    color: #7f1d1d;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-  }
-  .hero h1 {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin: 12px 0;
-  }
-  .hero p {
-    font-size: 1.1rem;
-    color: #fef3c7;
-    max-width: 600px;
-    margin: 0 auto;
-  }
+  .hero { background: linear-gradient(180deg, #dc2626, #f59e0b); color: white; text-align: center; padding: 50px 16px; }
+  .badge { background: #fef08a; color: #854d0e; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 0.8rem; }
+  .hero h1 { font-size: 2rem; margin: 12px 0; font-weight: 900; }
 
-  /* Sections */
-  .section {
-    padding: 56px 0;
-  }
-  .bg-white { background-color: #ffffff; }
-  .border-y { border-top: 1px solid #fde68a; border-bottom: 1px solid #fde68a; }
-  .section-title {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .section-title h2 {
-    color: #dc2626;
-    font-size: 1.8rem;
-    font-weight: 900;
-    text-transform: uppercase;
-  }
-  .section-title p {
-    color: #4b5563;
-    margin-top: 8px;
-  }
+  /* Product List */
+  .section { padding: 40px 0; }
+  .title { text-align: center; color: #dc2626; margin-bottom: 30px; font-size: 1.6rem; font-weight: 900; }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .product-card { background: white; border: 1px solid #fef08a; border-radius: 16px; padding: 16px; position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .product-tag { position: absolute; top: 12px; right: 12px; background: #fee2e2; color: #dc2626; font-size: 0.7rem; font-weight: bold; padding: 2px 8px; border-radius: 6px; }
+  .product-icon { font-size: 3rem; text-align: center; margin: 15px 0; }
+  .category { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+  .product-name { font-size: 1.05rem; margin: 4px 0; font-weight: 700; }
+  .desc { font-size: 0.8rem; color: #666; margin-bottom: 12px; }
+  .price-box { margin-bottom: 12px; }
+  .price-current { font-size: 1.2rem; font-weight: 900; color: #dc2626; }
+  .price-old { font-size: 0.85rem; color: #aaa; text-decoration: line-through; margin-left: 6px; }
+  .btn-buy { background: #dc2626; color: white; border: none; width: 100%; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+  .btn-buy:hover { background: #b91c1c; }
 
-  /* Product Grid */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-  .product-card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    border: 1px solid #fef3c7;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .product-img {
-    height: 160px;
-    background: #fef3c7;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    margin-bottom: 16px;
-  }
-  .product-tags {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .category { color: #dc2626; background: #fee2e2; padding: 2px 8px; border-radius: 4px; }
-  .tag { color: #b45309; background: #fef3c7; padding: 2px 8px; border-radius: 4px; }
-  .product-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-  }
-  .btn-detail {
-    background: #dc2626;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    border-radius: 12px;
-    font-weight: 700;
-    transition: background 0.2s;
-  }
-  .btn-detail:hover { background: #b91c1c; }
-
-  /* Features Grid */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  .feature-card {
-    background: #fffbeb;
-    padding: 20px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid #fef3c7;
-  }
-  .feature-card i {
-    font-size: 2rem;
-    color: #dc2626;
-    margin-bottom: 12px;
-  }
-  .feature-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
-  .feature-card p { font-size: 0.8rem; color: #4b5563; }
-
-  /* Reviews */
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-  }
-  .review-card {
-    background: white;
-    padding: 24px;
-    border-radius: 16px;
-    border: 1px solid #fef3c7;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
-  .review-text { font-style: italic; color: #4b5563; font-size: 0.9rem; margin-bottom: 16px; }
-  .review-author { text-align: right; font-weight: 700; color: #dc2626; }
+  /* Modal Cart */
+  .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+  .modal-content { background: white; width: 90%; max-width: 450px; border-radius: 16px; padding: 20px; }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+  .close { font-size: 1.5rem; cursor: pointer; }
+  .cart-items-list { max-height: 250px; overflow-y: auto; margin: 15px 0; }
+  .cart-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 0.9rem; }
+  .empty-msg { text-align: center; color: #888; padding: 20px 0; }
+  .cart-footer { border-top: 1px solid #eee; padding-top: 12px; }
+  .total-box { display: flex; justify-content: space-between; font-size: 1.1rem; margin-bottom: 12px; }
+  .btn-checkout { background: #0088ff; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
 
   /* Footer */
-  .footer {
-    background: #111827;
-    color: #d1d5db;
-    padding: 48px 0;
-    border-top: 4px solid #dc2626;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
-  }
-  .footer-logo { font-size: 1.5rem; color: #fbbf24; font-style: italic; }
-  .footer-sub { font-size: 0.8rem; color: #9ca3af; margin-bottom: 16px; }
-  .contact-info p { font-size: 0.875rem; margin-bottom: 8px; }
-  .contact-info i { color: #ef4444; margin-right: 8px; }
-  .social-links { display: flex; gap: 16px; font-size: 1.5rem; color: #fbbf24; margin: 12px 0; }
-  .copyright { font-size: 0.75rem; color: #6b7280; margin-top: 24px; }
-
-  /* Responsive Mobile Nav */
-  @media (max-width: 768px) {
-    .nav { display: none; }
-    .hero h1 { font-size: 1.8rem; }
-  }
+  .footer { background: #111; color: #aaa; padding: 20px 0; font-size: 0.85rem; margin-top: 40px; }
+  .text-center { text-align: center; }
 </style>
