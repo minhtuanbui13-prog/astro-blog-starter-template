@@ -123,7 +123,7 @@ const { shopInfo, products } = await res.json();
     <a href="#products" class="btn-hero">Xem danh mục sản phẩm 👇</a>
   </section>
 
-  <main id="products">
+<main id="products">
     <div class="section-title">
       <div class="title-bar"></div>
       Sản Phẩm Nổi Bật ({products?.length || 0})
@@ -132,11 +132,12 @@ const { shopInfo, products } = await res.json();
       {products && products.map((item) => (
         <div class="card">
           <div>
-            <!-- Đưa thẻ tag vào bên trong card-img-wrap để không đè vỡ layout -->
+            <!-- THAY THẾ / SỬA ĐOẠN NÀY VÀO ĐÂY -->
             <div class="card-img-wrap">
               {item.tag && <span class="card-tag">{item.tag}</span>}
               <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
             </div>
+            
             <div class="card-category">{item.category}</div>
             <div class="card-title">{item.name}</div>
             <div class="card-desc">{item.desc}</div>
