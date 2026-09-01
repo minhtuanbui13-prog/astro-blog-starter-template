@@ -110,7 +110,7 @@ const products = [
   <!-- Giữ nguyên Favicon của bạn -->
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="sheet">
-  <style>
+  <>
 * { 
   box-sizing: border-box; 
   margin: 0; 
@@ -176,26 +176,25 @@ const products = [
     .footer-text { font-size: 13px; color: #94a3b8; line-height: 1.6; }
     .copyright { background: #020617; text-align: center; padding: 12px; font-size: 12px; color: #64748b; }
 
-/* --- CĂN CHỈNH HERO FULLWIDTH VÀ CHỮ ĐÈ LÊN ẢNH --- */
+/* --- CĂN CHỈNH HERO RESPONSIVE CHO ĐIỆN THOẠI --- */
 .hero-full {
   width: 100%;
   position: relative;
-  margin-bottom: 40px;
+  line-height: 0;
+  margin-bottom: 30px;
   overflow: hidden;
 }
 
 .hero-img-wrap {
   width: 100%;
-  aspect-ratio: 16 / 9; /* Thiết lập tỷ lệ khung hình chuẩn giúp tự động co giãn theo chiều ngang */
-  max-height: 380px;     /* Giới hạn không bị quá cao trên màn hình máy tính lớn */
-  background: #000;
 }
 
 .hero-img {
   width: 100%;
-  height: 100%;           /* Lấp đầy khung chứa thay vì cố định px */
+  height: 200px; /* Mặc định cho điện thoại: chiều cao gọn gàng, vừa mắt */
   display: block;
-  object-fit: cover;     /* Tự động cắt và căn giữa ảnh chuẩn xác mà không bị méo */
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-content-overlay {
@@ -210,57 +209,74 @@ const products = [
   align-items: center;
   text-align: center;
   color: white;
-  padding: 16px;
+  padding: 12px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.3); /* Thêm lớp phủ tối nhẹ giúp chữ nổi bật và sắc nét hơn */
+  background: rgba(0, 0, 0, 0.3); /* Lớp phủ tối nhẹ giúp chữ nổi bật trên màn hình nhỏ */
 }
 
 .hero-content-overlay .hero-badge {
-  background: rgba(0, 102, 255, 0.85);
+  background: rgba(0, 102, 255, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: #ffffff;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .hero-content-overlay h2 {
-  font-size: clamp(18px, 4.5vw, 36px); /* Sử dụng clamp tối ưu cho cả mobile và desktop */
+  font-size: clamp(16px, 5vw, 28px); /* Tự động thu nhỏ chữ linh hoạt trên điện thoại */
   font-weight: 800;
-  margin: 6px 0 12px;
-  letter-spacing: 0.5px;
-  line-height: 1.4;      /* Giảm dòng một chút để không bị chiếm quá nhiều diện tích trên mobile */
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  margin: 4px 0 6px;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero-content-overlay p {
   color: #f1f5f9;
-  font-size: clamp(11px, 2.2vw, 15px);
-  margin-bottom: 16px;
+  font-size: clamp(11px, 3vw, 13px);
+  margin-bottom: 10px;
   font-weight: 500;
-  letter-spacing: 0.4px;
-  line-height: 1.5;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .hero-content-overlay .btn-hero {
   background: #ffffff;
   color: #0066ff;
   font-weight: 700;
-  padding: 10px 20px;
-  border-radius: 24px;
+  padding: 6px 14px;
+  border-radius: 20px;
   text-decoration: none;
-  font-size: 13px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 11px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s, background 0.2s;
 }
 
-.hero-content-overlay .btn-hero:hover {
-  background: #f8fafc;
-  transform: translateY(-2px);
+/* Tự động mở rộng kích thước trên màn hình máy tính (Desktop) */
+@media (min-width: 768px) {
+  .hero-img {
+    height: 320px; /* Máy tính sẽ hiển thị banner cao và rộng hơn */
+  }
+  .hero-content-overlay {
+    padding: 20px;
+  }
+  .hero-content-overlay .hero-badge {
+    padding: 4px 12px;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .hero-content-overlay p {
+    margin-bottom: 16px;
+  }
+  .hero-content-overlay .btn-hero {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
 }
 /* --- KẾT THÚC CSS MỚI --- */
   </style>
