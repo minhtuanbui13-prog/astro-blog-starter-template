@@ -44,31 +44,44 @@ const { shopInfo, products } = data || {};
     .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
     
-    /* Tag định vị chuẩn ở góc trái */
-    .card-tag { position: absolute; top: 24px; left: 24px; background: #0066ff; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; z-index: 10; }
+    /* Cố định Tag góc trên bên trái khung chứa */
+    .card-tag { 
+      position: absolute; 
+      top: 8px; 
+      left: 8px; 
+      background: #0066ff; 
+      color: #fff; 
+      font-size: 10px; 
+      font-weight: 700; 
+      padding: 4px 8px; 
+      border-radius: 6px; 
+      z-index: 10; 
+    }
     
-    /* Khung chứa ảnh dùng tỷ lệ vuông aspect-ratio */
+    /* Ép khung chứa ảnh chuẩn 1:1 tuyệt đối */
     .card-img-wrap { 
       width: 100%;
-      aspect-ratio: 1 / 1; 
+      aspect-ratio: 1 / 1;
       background: #f8fafc; 
       border-radius: 8px; 
       overflow: hidden; 
       margin-bottom: 12px;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 8px;
     }
     
-    /* Hiển thị full ảnh không cắt mất góc */
+    /* Sửa lỗi ảnh không chịu co giãn tỉ lệ */
     .card-img { 
       max-width: 100%; 
       max-height: 100%; 
-      width: auto;
-      height: auto;
-      object-fit: contain; 
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Căn toàn bộ ảnh vừa khít khung vuông */
       object-position: center;
+      display: block;
       transition: transform 0.3s ease; 
     }
     .card:hover .card-img { transform: scale(1.05); }
@@ -119,9 +132,10 @@ const { shopInfo, products } = data || {};
     <div class="grid">
       {products && products.map((item) => (
         <div class="card">
-          {item.tag && <span class="card-tag">{item.tag}</span>}
           <div>
+            <!-- Đưa thẻ tag vào bên trong card-img-wrap để không đè vỡ layout -->
             <div class="card-img-wrap">
+              {item.tag && <span class="card-tag">{item.tag}</span>}
               <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
             </div>
             <div class="card-category">{item.category}</div>
