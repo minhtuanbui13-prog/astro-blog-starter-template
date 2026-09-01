@@ -109,8 +109,8 @@ const products = [
   
   <!-- Giữ nguyên Favicon của bạn -->
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="sheet">
-  <>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
 * { 
   box-sizing: border-box; 
   margin: 0; 
@@ -200,10 +200,11 @@ const products = [
 
 .hero-content-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Căn giữa khung chữ tuyệt đối */
+  width: 90%;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,8 +214,7 @@ const products = [
   padding: 12px;
   z-index: 10;
   background: rgba(0, 0, 0, 0.35);
-  max-width: 700px; /* Bổ sung dòng này */
-  margin: 0 auto;   /* Bổ sung dòng này để giữ khung chữ luôn ở giữa */
+  border-radius: 12px;
 }
 
 .hero-content-overlay .hero-badge {
