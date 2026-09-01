@@ -226,17 +226,21 @@ const products = [
 }
 
 .hero-content-overlay h2 {
-  font-size: clamp(20px, 4vw, 36px); /* Kích thước chữ co giãn linh hoạt theo màn hình */
+  font-size: clamp(20px, 4vw, 36px);
   font-weight: 800;
-  margin: 4px 0 8px;
+  margin: 6px 0 12px;
+  letter-spacing: 0.5px; /* Tạo khoảng cách vừa phải giữa các chữ cái tiêu đề */
+  line-height: 1.4;      /* Tăng khoảng cách dòng giúp tiêu đề không bị dính sát */
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .hero-content-overlay p {
   color: #f1f5f9;
   font-size: clamp(12px, 2vw, 15px);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   font-weight: 500;
+  letter-spacing: 0.4px; /* Tạo độ thoáng cho đoạn mô tả */
+  line-height: 1.5;      /* Giúp các dòng văn bản cách đều, dễ đọc */
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
