@@ -192,9 +192,9 @@ const products = [
 
 .hero-img {
   width: 100%;
-  height: auto; /* Giúp chiều cao tự co giãn theo đúng tỷ lệ ảnh gốc */
+  height: auto;
   display: block;
-  object-fit: contain; /* Đảm bảo hiển thị trọn vẹn 100% chiều ngang banner */
+  object-fit: contain;
   object-position: center;
 }
 
@@ -203,17 +203,17 @@ const products = [
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 600px;
+  width: 95%;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
-  padding: 8px 12px;
+  padding: 8px 6px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.45); /* Lớp nền tối giúp nổi bật chữ trên khung banner nhỏ */
+  background: rgba(0, 0, 0, 0.45);
   border-radius: 10px;
 }
 
@@ -223,45 +223,48 @@ const products = [
   color: #ffffff;
   padding: 2px 8px;
   border-radius: 8px;
-  font-size: 9px;
+  font-size: clamp(8px, 2.2vw, 11px);
   font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 4px;
+  white-space: nowrap; /* Giữ Badge luôn trên 1 hàng */
 }
 
 .hero-content-overlay h2 {
-  font-size: clamp(13px, 3.8vw, 26px); /* Thu nhỏ cỡ chữ phù hợp với banner di động */
+  font-size: clamp(11px, 3.2vw, 26px); /* Co font vừa đủ để đố chữ nằm trên 1 hàng */
   font-weight: 800;
   margin: 2px 0 4px;
   line-height: 1.2;
+  white-space: nowrap; /* Đảm bảo Tiêu đề luôn nằm trên 1 hàng */
 }
 
 .hero-content-overlay p {
   color: #f1f5f9;
-  font-size: clamp(10px, 2.3vw, 13px);
+  font-size: clamp(8px, 2.2vw, 13px);
   margin-bottom: 8px;
-  line-height: 1.3;
+  line-height: 1.2;
+  white-space: nowrap; /* Đảm bảo dòng Mô tả luôn nằm trên 1 hàng */
 }
 
 .hero-content-overlay .btn-hero {
   background: #ffffff;
   color: #0066ff;
   font-weight: 700;
-  padding: 5px 12px;
+  padding: 4px 12px;
   border-radius: 16px;
   text-decoration: none;
-  font-size: 10px;
+  font-size: clamp(9px, 2.4vw, 12px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* Nút bấm nằm nguyên trên 1 hàng */
 }
 
-/* Điều chỉnh khoảng cách cho màn hình máy tính (Desktop) */
+/* Cấu hình lề cho màn hình máy tính (Desktop) */
 @media (min-width: 768px) {
   .hero-content-overlay {
     padding: 16px 20px;
   }
   .hero-content-overlay .hero-badge {
     padding: 4px 12px;
-    font-size: 11px;
     margin-bottom: 8px;
   }
   .hero-content-overlay h2 {
@@ -272,7 +275,6 @@ const products = [
   }
   .hero-content-overlay .btn-hero {
     padding: 8px 18px;
-    font-size: 12px;
   }
 }
 /* --- KẾT THÚC CSS MỚI --- */
