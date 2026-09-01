@@ -1,4 +1,8 @@
-
+---
+// Fetch trực tiếp từ Worker của bạn
+const res = await fetch('https://astro-blog-starter-template.minhtuan-bui13.workers.dev/');
+const { shopInfo, products } = await res.json();
+---
 
 <!DOCTYPE html>
 <html lang="vi">
