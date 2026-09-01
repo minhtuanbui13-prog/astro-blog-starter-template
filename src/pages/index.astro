@@ -43,29 +43,34 @@ const { shopInfo, products } = data || {};
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
     .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-    .card-tag { position: absolute; top: 24px; left: 24px; background: #0066ff; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; z-index: 2; }
     
-    /* Khung chứa ảnh: Dùng aspect-ratio thay vì đặt height cố định */
-.card-img-wrap { 
-  width: 100%;
-  aspect-ratio: 1 / 1; /* Cố định tỉ lệ vuông chuẩn (hoặc 4/3 nếu muốn khung chữ nhật) */
-  background: #f8fafc; 
-  border-radius: 8px; 
-  overflow: hidden; 
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Ảnh sản phẩm: Co giãn tràn khung hoặc căn trọn trẹn */
-.card-img { 
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Giữ nguyên toàn bộ hình ảnh, không bị cắt mép */
-  object-position: center;
-  transition: transform 0.3s ease; 
-}
+    /* Tag định vị chuẩn ở góc trái */
+    .card-tag { position: absolute; top: 24px; left: 24px; background: #0066ff; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; z-index: 10; }
+    
+    /* Khung chứa ảnh dùng tỷ lệ vuông aspect-ratio */
+    .card-img-wrap { 
+      width: 100%;
+      aspect-ratio: 1 / 1; 
+      background: #f8fafc; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+    
+    /* Hiển thị full ảnh không cắt mất góc */
+    .card-img { 
+      max-width: 100%; 
+      max-height: 100%; 
+      width: auto;
+      height: auto;
+      object-fit: contain; 
+      object-position: center;
+      transition: transform 0.3s ease; 
+    }
     .card:hover .card-img { transform: scale(1.05); }
 
     .card-category { font-size: 11px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
