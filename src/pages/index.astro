@@ -1,4 +1,19 @@
 ---
+let shopInfo = { name: "Vyy Lady Store", slogan: "Snack Your Style", hotline: "1900 8280" };
+let products = [];
+
+try {
+  const res = await fetch('https://astro-blog-starter-template.minhtuan-bui13.workers.dev/');
+  if (res.ok) {
+    const data = await res.json();
+    shopInfo = data.shopInfo || shopInfo;
+    products = data.products || [];
+  }
+} catch (error) {
+  console.error("Lỗi kết nối API Cloudflare Worker:", error);
+}
+
+---
 // Fetch trực tiếp từ Worker của bạn
 const res = await fetch('https://astro-blog-starter-template.minhtuan-bui13.workers.dev/');
 const { shopInfo, products } = await res.json();
