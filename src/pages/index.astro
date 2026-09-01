@@ -180,20 +180,22 @@ const products = [
 .hero-full {
   width: 100%;
   position: relative;
-  line-height: 0;
   margin-bottom: 40px;
   overflow: hidden;
 }
 
 .hero-img-wrap {
   width: 100%;
+  aspect-ratio: 16 / 9; /* Thiết lập tỷ lệ khung hình chuẩn giúp tự động co giãn theo chiều ngang */
+  max-height: 380px;     /* Giới hạn không bị quá cao trên màn hình máy tính lớn */
+  background: #000;
 }
 
 .hero-img {
   width: 100%;
-  height: 320px; /* Cố định chiều cao banner nhỏ gọn hơn (bạn có thể đổi thành 240px hoặc 320px tùy ý thích) */
+  height: 100%;           /* Lấp đầy khung chứa thay vì cố định px */
   display: block;
-  object-fit: cover; /* Tự động cắt và căn giữa ảnh chuẩn xác mà không bị méo */
+  object-fit: cover;     /* Tự động cắt và căn giữa ảnh chuẩn xác mà không bị méo */
 }
 
 .hero-content-overlay {
@@ -210,7 +212,7 @@ const products = [
   color: white;
   padding: 16px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.25); /* Thêm lớp phủ tối nhẹ giúp chữ nổi bật và sắc nét hơn */
+  background: rgba(0, 0, 0, 0.3); /* Thêm lớp phủ tối nhẹ giúp chữ nổi bật và sắc nét hơn */
 }
 
 .hero-content-overlay .hero-badge {
@@ -226,21 +228,21 @@ const products = [
 }
 
 .hero-content-overlay h2 {
-  font-size: clamp(20px, 4vw, 36px);
+  font-size: clamp(18px, 4.5vw, 36px); /* Sử dụng clamp tối ưu cho cả mobile và desktop */
   font-weight: 800;
   margin: 6px 0 12px;
-  letter-spacing: 0.5px; /* Tạo khoảng cách vừa phải giữa các chữ cái tiêu đề */
-  line-height: 1.8;      /* Tăng khoảng cách dòng giúp tiêu đề không bị dính sát */
+  letter-spacing: 0.5px;
+  line-height: 1.4;      /* Giảm dòng một chút để không bị chiếm quá nhiều diện tích trên mobile */
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .hero-content-overlay p {
   color: #f1f5f9;
-  font-size: clamp(12px, 2vw, 15px);
-  margin-bottom: 20px;
+  font-size: clamp(11px, 2.2vw, 15px);
+  margin-bottom: 16px;
   font-weight: 500;
-  letter-spacing: 0.4px; /* Tạo độ thoáng cho đoạn mô tả */
-  line-height: 2.0;      /* Giúp các dòng văn bản cách đều, dễ đọc */
+  letter-spacing: 0.4px;
+  line-height: 1.5;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
