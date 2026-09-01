@@ -175,6 +175,19 @@ const products = [
     .footer-title { color: #0066ff; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
     .footer-text { font-size: 13px; color: #94a3b8; line-height: 1.6; }
     .copyright { background: #020617; text-align: center; padding: 12px; font-size: 12px; color: #64748b; }
+.hero-banner-wrap {
+  width: 100%;
+  max-width: 1100px;
+  margin: 24px auto 0 auto; /* Tạo khoảng cách phía trên cách đều với nút bấm */
+  border-radius: 12px;
+  overflow: hidden;
+}
+.banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
   </style>
 </head>
 <body>
@@ -192,12 +205,19 @@ const products = [
     </div>
   </header>
 
-  <section class="hero">
-    <span class="hero-badge">Trải Nghiệm Mua Sắm Chuẩn Style</span>
-    <h2>Thế Giới Snack & Ăn Vặt Vyy Lady</h2>
-    <p>Chất lượng cao cấp - Hương vị đậm đà - Giao hàng cực nhanh.</p>
-    <a href="#products" class="btn-hero">Xem danh mục sản phẩm 👇</a>
-  </section>
+<section class="hero">
+  <span class="hero-badge">Trải Nghiệm Mua Sắm Chuẩn Style</span>
+  <h2>Thế Giới Snack & Ăn Vặt Vyy Lady</h2>
+  <p>Chất lượng cao cấp - Hương vị đậm đà - Giao hàng cực nhanh.</p>
+  <a href="#products" class="btn-hero">Xem danh mục sản phẩm 👇</a>
+  
+  <!-- Hình ảnh banner được chèn ở dưới phần chữ -->
+  <div class="hero-banner-wrap">
+    <a href="#products">
+      <img src="https://vyylady.com/wp-content/uploads/2025/09/Banner-chan-ga-cua-Vyy-Lady-1536x415.png" alt="Vyy Lady Banner" class="banner-img" />
+    </a>
+  </div>
+</section>
 
   <main id="products">
     <div class="section-title">
