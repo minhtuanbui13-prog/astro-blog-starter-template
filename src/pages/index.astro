@@ -1,6 +1,37 @@
 ---
-// Import dữ liệu từ index.js
-import { shopInfo, products } from '../data/index.js';
+// src/pages/index.astro
+
+// Khai báo dữ liệu trực tiếp hoặc import từ file src/data/index.js
+const shopInfo = {
+  name: "Vyy Lady Store",
+  slogan: "Snack Your Style, Chill Your Way",
+  hotline: "1900 8280",
+  zalo: "0900000000",
+  address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
+};
+
+const products = [
+  {
+    id: 1,
+    name: "Chân gà nguyên xương Vyy Tê Đỉnh 35g",
+    category: "Chân gà tẩm vị",
+    price: 15000,
+    originalPrice: 18000,
+    tag: "Bán chạy",
+    image: "🍗",
+    desc: "Sốt cay tê thần thánh, chuẩn vị Tứ Xuyên ngấm sâu từng nấc xương."
+  },
+  {
+    id: 2,
+    name: "Chân gà không xương Vyy Quốc Dân 26g",
+    category: "Chân gà rút xương",
+    price: 18000,
+    originalPrice: 22000,
+    tag: "Hot item",
+    image: "✨",
+    desc: "Giòn sần sật, đậm vị ướp thảo mộc thiên nhiên thanh nhẹ."
+  }
+];
 ---
 
 <html lang="vi">
@@ -19,7 +50,6 @@ import { shopInfo, products } from '../data/index.js';
               brandBlue: '#0066FF',
               brandBlueHover: '#0052CC',
               brandLightBg: '#F8FAFC',
-              brandAccentYellow: '#FFB800',
             }
           }
         }
@@ -28,12 +58,12 @@ import { shopInfo, products } from '../data/index.js';
   </head>
   <body class="bg-brandLightBg text-gray-800 font-sans min-h-screen flex flex-col">
 
-    <!-- Top Announcement Bar -->
+    <!-- Top Bar -->
     <div class="bg-gray-900 text-white text-xs py-1.5 px-4 text-center">
       🚀 Mua sắm dễ dàng tại <span class="text-yellow-400 font-bold">{shopInfo.name}</span> - Hotline: <a href={`tel:${shopInfo.hotline}`} class="underline">{shopInfo.hotline}</a>
     </div>
 
-    <!-- Header / Navbar (Nền Trắng - Chữ & Accent Xanh) -->
+    <!-- Header -->
     <header class="bg-white text-gray-800 shadow-sm sticky top-0 z-50 border-b border-gray-100">
       <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         <div>
@@ -48,7 +78,7 @@ import { shopInfo, products } from '../data/index.js';
       </div>
     </header>
 
-    <!-- Hero Banner (Tông Xanh - Trắng Sang Trọng) -->
+    <!-- Hero Banner -->
     <section class="bg-gradient-to-r from-blue-600 to-brandBlue text-white py-14 px-4 text-center">
       <div class="max-w-3xl mx-auto">
         <span class="bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-white/30">
@@ -62,7 +92,7 @@ import { shopInfo, products } from '../data/index.js';
       </div>
     </section>
 
-    <!-- Main Content / Product Section (Nền Trắng) -->
+    <!-- Product Grid -->
     <main id="products" class="max-w-6xl mx-auto px-4 py-12 flex-grow">
       <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
         <h3 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -72,12 +102,10 @@ import { shopInfo, products } from '../data/index.js';
         <span class="text-sm text-gray-500">Tất cả sản phẩm chính hãng</span>
       </div>
 
-      <!-- Product Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((item) => (
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-200 flex flex-col justify-between group">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition flex flex-col justify-between group">
             <div>
-              <!-- Product Image Container -->
               <div class="h-48 bg-slate-50 flex items-center justify-center text-6xl relative group-hover:bg-blue-50/50 transition">
                 <span>{item.image}</span>
                 {item.tag && (
@@ -87,7 +115,6 @@ import { shopInfo, products } from '../data/index.js';
                 )}
               </div>
 
-              <!-- Content -->
               <div class="p-4">
                 <span class="text-xs text-brandBlue font-bold uppercase tracking-wider">{item.category}</span>
                 <h4 class="font-bold text-gray-800 text-base mt-1 group-hover:text-brandBlue transition line-clamp-2">{item.name}</h4>
@@ -95,7 +122,6 @@ import { shopInfo, products } from '../data/index.js';
               </div>
             </div>
 
-            <!-- Price & Button -->
             <div class="p-4 pt-0">
               <div class="flex items-baseline gap-2 mb-3">
                 <span class="text-brandBlue font-extrabold text-xl">
@@ -116,7 +142,7 @@ import { shopInfo, products } from '../data/index.js';
       </div>
     </main>
 
-    <!-- Footer (Tông Tối / Xanh Đậm Tương Phản) -->
+    <!-- Footer -->
     <footer class="bg-slate-900 text-white mt-12 border-t-2 border-brandBlue">
       <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
