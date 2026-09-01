@@ -109,7 +109,7 @@ const products = [
   
   <!-- Giữ nguyên Favicon của bạn -->
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="sheet">
   <style>
 * { 
   box-sizing: border-box; 
@@ -191,10 +191,9 @@ const products = [
 
 .hero-img {
   width: 100%;
-  height: auto;
-  min-height: 220px; /* Đảm bảo ảnh luôn có độ cao tối thiểu trên màn hình nhỏ */
+  height: 280px; /* Cố định chiều cao banner nhỏ gọn hơn (bạn có thể đổi thành 240px hoặc 320px tùy ý thích) */
   display: block;
-  object-fit: cover;
+  object-fit: cover; /* Tự động cắt và căn giữa ảnh chuẩn xác mà không bị méo */
 }
 
 .hero-content-overlay {
