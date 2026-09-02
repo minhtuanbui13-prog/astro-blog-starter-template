@@ -1,4 +1,5 @@
-// src/pages/san-pham/[vyy-te-dinh].astro
+---
+// src/pages/san-pham/[slug].astro
 
 const products = [
   {
@@ -69,7 +70,7 @@ const products = [
     price: 35000,
     originalPrice: 40000,
     tag: "Cao cấp",
-    image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-300x300.jpg",
+    image: "https://vyylady.com/wp-content/uploads/2025/06/7-300x300.png",
     desc: "Chân gà rút xương thấm sốt chanh tây chua cay tươi mát, giòn chắc, dễ ăn và cực cuốn.",
     detail: "Hương vị chanh tây thanh mát kết hợp cùng vị cay nhẹ tạo nên điểm nhấn độc đáo, ăn hoài không ngấy."
   },
@@ -81,7 +82,7 @@ const products = [
     price: 12000,
     originalPrice: 15000,
     tag: "Hot item",
-    image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-300x300.jpg",
+    image: "https://vyylady.com/wp-content/uploads/2025/06/3-1-600x900.png",
     desc: "Hình đùi gà ngộ nghĩnh, lắc bột phô mai béo ngậy mặn ngọt.",
     detail: "Giòn rụm với lớp bột phô mai thơm phức béo ngậy phủ bên ngoài."
   },
@@ -93,7 +94,7 @@ const products = [
     price: 14000,
     originalPrice: 17000,
     tag: "Mới",
-    image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-300x300.jpg",
+    image: "https://vyylady.com/wp-content/uploads/2025/07/9-600x900.png",
     desc: "Vị đậm đà béo ngậy chuẩn nội địa Trung, ăn là ghiền.",
     detail: "Đặc sản chuẩn vị nội địa mang đến trải nghiệm vị giác vô cùng độc đáo và cuốn hút."
   }
@@ -169,7 +170,7 @@ export async function getStaticPaths() {
       price: 35000,
       originalPrice: 40000,
       tag: "Cao cấp",
-      image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-300x300.jpg",
+      image: "https://vyylady.com/wp-content/uploads/2025/06/7-300x300.png",
       desc: "Chân gà rút xương thấm sốt chanh tây chua cay tươi mát, giòn chắc, dễ ăn và cực cuốn.",
       detail: "Hương vị chanh tây thanh mát kết hợp cùng vị cay nhẹ tạo nên điểm nhấn độc đáo, ăn hoài không ngấy."
     },
@@ -181,7 +182,7 @@ export async function getStaticPaths() {
       price: 12000,
       originalPrice: 15000,
       tag: "Hot item",
-      image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-300x300.jpg",
+      image: "https://vyylady.com/wp-content/uploads/2025/06/3-1-600x900.png",
       desc: "Hình đùi gà ngộ nghĩnh, lắc bột phô mai béo ngậy mặn ngọt.",
       detail: "Giòn rụm với lớp bột phô mai thơm phức béo ngậy phủ bên ngoài."
     },
@@ -193,7 +194,7 @@ export async function getStaticPaths() {
       price: 14000,
       originalPrice: 17000,
       tag: "Mới",
-      image: "https://vyylady.com/wp-content/uploads/2026/01/Gemini_Generated_Image_f2xd4pf2xd4pf2xd-300x300.jpg",
+      image: "https://vyylady.com/wp-content/uploads/2025/07/9-600x900.png",
       desc: "Vị đậm đà béo ngậy chuẩn nội địa Trung, ăn là ghiền.",
       detail: "Đặc sản chuẩn vị nội địa mang đến trải nghiệm vị giác vô cùng độc đáo và cuốn hút."
     }
@@ -214,7 +215,6 @@ const shopInfo = {
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
-// Lọc ra 4 sản phẩm ngẫu nhiên hoặc khác sản phẩm hiện tại làm sản phẩm tương tự
 const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4);
 ---
 
@@ -225,116 +225,164 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{product.name} - {shopInfo.name}</title>
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
-}
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
+    }
     
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+
     header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
-    .header-container { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { color: #0066ff; font-size: 22px; font-weight: 900; text-transform: uppercase; text-decoration: none; }
+    .header-container { max-width: 1000px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { color: #0066ff; font-size: 20px; font-weight: 900; text-transform: uppercase; text-decoration: none; }
     .back-home { font-size: 14px; color: #64748b; text-decoration: none; font-weight: 600; }
     .back-home:hover { color: #0066ff; }
 
-    main { max-width: 900px; margin: 40px auto; padding: 0 16px; flex-grow: 1; width: 100%; }
+    main { max-width: 1000px; margin: 30px auto; padding: 0 16px; width: 100%; }
     
-    .product-detail-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-bottom: 50px; }
-    @media (max-width: 768px) { .product-detail-container { grid-template-columns: 1fr; } }
+    /* FIX CHI TIẾT SẢN PHẨM CHÍNH */
+    .product-detail-container { 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 16px; 
+      padding: 24px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 24px; 
+      margin-bottom: 40px; 
+    }
+
+    @media (min-width: 768px) {
+      .product-detail-container { 
+        display: grid; 
+        grid-template-columns: 320px 1fr; 
+        gap: 32px; 
+        align-items: start;
+      }
+    }
 
     .product-img-wrap { 
-  width: 100%; 
-  aspect-ratio: 1 / 1; 
-  background: #f8fafc; 
-  border-radius: 12px; 
-  overflow: hidden; 
-  display: flex; 
-  align-items: center;    /* Căn giữa theo chiều dọc (tạo lề trên và dưới đều nhau) */
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  padding: 20px;           /* Tạo khoảng đệm (lề) xung quanh ảnh */
-  border: 1px solid #e2e8f0; 
-}
+      width: 100%; 
+      height: 320px; 
+      background: #f8fafc; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center;    
+      justify-content: center; 
+      padding: 16px;           
+      border: 1px solid #e2e8f0; 
+    }
 
-.product-img { 
-  max-width: 100%;       /* Giữ kích thước tối đa vừa vặn với khung */
-  max-height: 100%;      /* Đảm bảo ảnh không bị tràn lề trên/dưới */
-  object-fit: contain;   /* Giữ nguyên tỷ lệ chuẩn của ảnh, không bị méo hình */
-}
+    .product-img { 
+      max-width: 100%;       
+      max-height: 100%;      
+      width: auto;
+      height: auto;
+      object-fit: contain;   
+      display: block;
+    }
 
-    .product-info { display: flex; flex-direction: column; gap: 16px; }
-    .category { font-size: 13px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
-    .title { font-size: 24px; font-weight: 800; color: #0f172a; line-height: 1.3; }
+    .product-info { display: flex; flex-direction: column; gap: 14px; }
+    .category { font-size: 12px; font-weight: 700; color: #0066ff; text-transform: uppercase; letter-spacing: 0.5px; }
+    .title { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1.3; }
     
-    .price-box { display: flex; align-items: baseline; gap: 12px; background: #f1f5f9; padding: 12px 16px; border-radius: 8px; }
-    .price { font-size: 24px; font-weight: 800; color: #0066ff; }
+    .price-box { display: flex; align-items: baseline; gap: 12px; background: #f1f5f9; padding: 10px 14px; border-radius: 8px; width: fit-content; }
+    .price { font-size: 22px; font-weight: 800; color: #0066ff; }
     .original-price { font-size: 14px; color: #94a3b8; text-decoration: line-through; }
 
-    .desc { font-size: 15px; color: #475569; line-height: 1.6; }
-    .detail-box { font-size: 14px; color: #334155; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+    .desc { font-size: 14px; color: #475569; line-height: 1.5; }
+    .detail-box { font-size: 13px; color: #334155; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 12px; }
 
-    .btn-zalo { background: #0066ff; color: white; text-align: center; padding: 14px; border-radius: 8px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; margin-top: 8px; }
+    .btn-zalo { background: #0066ff; color: white; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; margin-top: 6px; font-size: 14px; }
     .btn-zalo:hover { background: #0052cc; }
 
-    /* Phần Sản phẩm tương tự */
-    .section-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
-.related-grid { 
-  display: grid; 
-  grid-template-columns: repeat(2, 1fr); /* Đổi sang hiển thị 2 cột to bản trên máy tính hoặc tùy chỉnh */
-  gap: 20px; 
-}
-@media (min-width: 768px) {
-  .related-grid { 
-    grid-template-columns: repeat(4, 1fr); /* Vẫn giữ 4 cột nhưng mở rộng không gian cho mỗi card */
-  }
-}
+    /* FIX SẢN PHẨM TƯƠNG TỰ - CHỐNG VỠ HOÀN TOÀN */
+    .section-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
+    
+    .related-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 16px; 
+      width: 100%;
+    }
 
-.card { 
-  background: #ffffff; 
-  border: 1px solid #e2e8f0; 
-  border-radius: 16px; 
-  padding: 16px; /* Tăng padding của khung thẻ để card trông to và dày dặn hơn */
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
-  text-decoration: none; 
-  color: inherit; 
-  transition: transform 0.2s, box-shadow 0.2s; 
-}
+    @media (min-width: 768px) {
+      .related-grid { 
+        grid-template-columns: repeat(4, 1fr); 
+      }
+    }
 
-.card:hover { 
-  transform: translateY(-4px); 
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08); 
-}
+    .card { 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 12px; 
+      padding: 12px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      text-decoration: none; 
+      color: inherit; 
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-width: 0; /* CHỐNG VỠ GRID */
+      overflow: hidden;
+    }
 
-.card-img-wrap { 
-  width: 100%; 
-  aspect-ratio: 1 / 1; /* Giữ khung hình vuông chuẩn */
-  background: #f8fafc; 
-  border-radius: 12px; 
-  overflow: hidden; 
-  display: flex; 
-  align-items: center;    
-  justify-content: center; 
-  padding: 16px; /* Tăng khoảng đệm để ảnh bên trong vừa vặn, không bị sát viền */
-  margin-bottom: 14px; 
-  border: 1px solid #f1f5f9;
-}
+    .card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06); 
+    }
 
-.card-img { 
-  max-width: 100%;       
-  max-height: 100%;      
-  object-fit: contain;   /* Giữ tỷ lệ ảnh chuẩn, không bị méo */
-  transition: transform 0.3s ease;
-}
+    .card-img-wrap { 
+      width: 100%; 
+      height: 150px; /* KHÓA CHIỀU CAO CỐ ĐỊNH */
+      background: #f8fafc; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center;    
+      justify-content: center; 
+      padding: 8px; 
+      margin-bottom: 10px; 
+      border: 1px solid #f1f5f9;
+    }
 
-.card:hover .card-img {
-  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi rê chuột vào ảnh */
-}
-    .card-title { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-price { font-size: 15px; font-weight: 800; color: #0066ff; }
+    .card-img { 
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+      object-fit: contain !important; /* GIỮ TỶ LỆ Chuẩn */
+      display: block;
+    }
+
+    .card-title { 
+      font-size: 13px; 
+      font-weight: 700; 
+      color: #0f172a; 
+      margin-bottom: 4px; 
+      line-height: 1.4;
+      display: -webkit-box; 
+      -webkit-line-clamp: 2; 
+      -webkit-box-orient: vertical; 
+      overflow: hidden; 
+      height: 2.8em;
+    }
+
+    .card-price { 
+      font-size: 14px; 
+      font-weight: 800; 
+      color: #0066ff; 
+      margin-top: 4px;
+    }
 
     footer { background: #0f172a; color: white; margin-top: 40px; border-top: 3px solid #0066ff; text-align: center; padding: 20px; font-size: 13px; color: #94a3b8; }
   </style>
@@ -349,7 +397,6 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
   </header>
 
   <main>
-    <!-- Thông tin chi tiết sản phẩm chính -->
     <div class="product-detail-container">
       <div class="product-img-wrap">
         <img src={product.image} alt={product.name} class="product-img" />
@@ -378,7 +425,6 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
       </div>
     </div>
 
-    <!-- Danh sách sản phẩm tương tự -->
     <div class="related-section">
       <h3 class="section-title">Sản phẩm tương tự</h3>
       <div class="related-grid">
