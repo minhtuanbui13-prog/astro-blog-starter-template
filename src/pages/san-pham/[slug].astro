@@ -1,5 +1,5 @@
 ---
-// src/pages/san-pham/[vyy-te-dinh].astro
+// src/pages/san-pham/[slug].astro
 
 const products = [
   {
@@ -215,13 +215,9 @@ const shopInfo = {
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
-// 1. Lọc bỏ sản phẩm đang xem
-const otherProducts = products.filter(p => p.slug !== product.slug);
-
-// 2. Trộn ngẫu nhiên danh sách sản phẩm còn lại và lấy 4 sản phẩm
-const relatedProducts = otherProducts
-  .sort(() => 0.5 - Math.random())
-  .slice(0, 4);
+// Lấy mặc định 4 sản phẩm đầu tiên phục vụ render khung HTML ban đầu (SEO + fallback)
+const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4);
+---
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -230,14 +226,14 @@ const relatedProducts = otherProducts
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{product.name} - {shopInfo.name}</title>
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
-}
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
+    }
     
     header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
     .header-container { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
@@ -251,23 +247,23 @@ const relatedProducts = otherProducts
     @media (max-width: 768px) { .product-detail-container { grid-template-columns: 1fr; } }
 
     .product-img-wrap { 
-  width: 100%; 
-  aspect-ratio: 1 / 1; 
-  background: #f8fafc; 
-  border-radius: 12px; 
-  overflow: hidden; 
-  display: flex; 
-  align-items: center;    /* Căn giữa theo chiều dọc (tạo lề trên và dưới đều nhau) */
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  padding: 20px;           /* Tạo khoảng đệm (lề) xung quanh ảnh */
-  border: 1px solid #e2e8f0; 
-}
+      width: 100%; 
+      aspect-ratio: 1 / 1; 
+      background: #f8fafc; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center;    
+      justify-content: center; 
+      padding: 20px;           
+      border: 1px solid #e2e8f0; 
+    }
 
-.product-img { 
-  max-width: 100%;       /* Giữ kích thước tối đa vừa vặn với khung */
-  max-height: 100%;      /* Đảm bảo ảnh không bị tràn lề trên/dưới */
-  object-fit: contain;   /* Giữ nguyên tỷ lệ chuẩn của ảnh, không bị méo hình */
-}
+    .product-img { 
+      max-width: 100%;       
+      max-height: 100%;      
+      object-fit: contain;   
+    }
 
     .product-info { display: flex; flex-direction: column; gap: 16px; }
     .category { font-size: 13px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
@@ -285,59 +281,59 @@ const relatedProducts = otherProducts
 
     /* Phần Sản phẩm tương tự */
     .section-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
-.related-grid { 
-  display: grid; 
-  grid-template-columns: repeat(2, 1fr); /* Đổi sang hiển thị 2 cột to bản trên máy tính hoặc tùy chỉnh */
-  gap: 20px; 
-}
-@media (min-width: 768px) {
-  .related-grid { 
-    grid-template-columns: repeat(4, 1fr); /* Vẫn giữ 4 cột nhưng mở rộng không gian cho mỗi card */
-  }
-}
+    .related-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 20px; 
+    }
+    @media (min-width: 768px) {
+      .related-grid { 
+        grid-template-columns: repeat(4, 1fr); 
+      }
+    }
 
-.card { 
-  background: #ffffff; 
-  border: 1px solid #e2e8f0; 
-  border-radius: 16px; 
-  padding: 16px; /* Tăng padding của khung thẻ để card trông to và dày dặn hơn */
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
-  text-decoration: none; 
-  color: inherit; 
-  transition: transform 0.2s, box-shadow 0.2s; 
-}
+    .card { 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 16px; 
+      padding: 16px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      text-decoration: none; 
+      color: inherit; 
+      transition: transform 0.2s, box-shadow 0.2s; 
+    }
 
-.card:hover { 
-  transform: translateY(-4px); 
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08); 
-}
+    .card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08); 
+    }
 
-.card-img-wrap { 
-  width: 100%; 
-  aspect-ratio: 1 / 1; /* Giữ khung hình vuông chuẩn */
-  background: #f8fafc; 
-  border-radius: 12px; 
-  overflow: hidden; 
-  display: flex; 
-  align-items: center;    
-  justify-content: center; 
-  padding: 16px; /* Tăng khoảng đệm để ảnh bên trong vừa vặn, không bị sát viền */
-  margin-bottom: 14px; 
-  border: 1px solid #f1f5f9;
-}
+    .card-img-wrap { 
+      width: 100%; 
+      aspect-ratio: 1 / 1; 
+      background: #f8fafc; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      display: flex; 
+      align-items: center;    
+      justify-content: center; 
+      padding: 16px; 
+      margin-bottom: 14px; 
+      border: 1px solid #f1f5f9;
+    }
 
-.card-img { 
-  max-width: 100%;       
-  max-height: 100%;      
-  object-fit: contain;   /* Giữ tỷ lệ ảnh chuẩn, không bị méo */
-  transition: transform 0.3s ease;
-}
+    .card-img { 
+      max-width: 100%;       
+      max-height: 100%;      
+      object-fit: contain;   
+      transition: transform 0.3s ease;
+    }
 
-.card:hover .card-img {
-  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi rê chuột vào ảnh */
-}
+    .card:hover .card-img {
+      transform: scale(1.05); 
+    }
     .card-title { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .card-price { font-size: 15px; font-weight: 800; color: #0066ff; }
 
@@ -406,5 +402,34 @@ const relatedProducts = otherProducts
     © {new Date().getFullYear()} {shopInfo.name} - Hotline: {shopInfo.hotline}
   </footer>
 
+  <!-- Script chạy tại Client để trộn ngẫu nhiên 4/8 sản phẩm mỗi lần tải trang -->
+  <script define:vars={{ products, currentSlug: product.slug }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Lọc sản phẩm hiện tại ra khỏi danh sách 8 sản phẩm
+      const otherProducts = products.filter(p => p.slug !== currentSlug);
+
+      // 2. Trộn ngẫu nhiên danh sách còn lại
+      const shuffled = otherProducts.sort(() => 0.5 - Math.random());
+
+      // 3. Cắt lấy đúng 4 sản phẩm ngẫu nhiên
+      const random4 = shuffled.slice(0, 4);
+
+      // 4. Cập nhật lại HTML phần sản phẩm tương tự
+      const grid = document.querySelector('.related-grid');
+      if (grid) {
+        grid.innerHTML = random4.map(item => `
+          <a href="/san-pham/${item.slug}" class="card">
+            <div>
+              <div class="card-img-wrap">
+                <img src="${item.image}" alt="${item.name}" class="card-img" loading="lazy" />
+              </div>
+              <div class="card-title">${item.name}</div>
+            </div>
+            <div class="card-price">${item.price.toLocaleString('vi-VN')}đ</div>
+          </a>
+        `).join('');
+      }
+    });
+  </script>
 </body>
 </html>
