@@ -8,10 +8,11 @@ import cloudflare from "@astrojs/cloudflare";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://buiminhtuan.io.vn",
-	output: "static",
 	integrations: [
 		mdx(),
-		sitemap()
+		sitemap({
+			prerender: true,
+		}),
 	],
 	adapter: cloudflare({
 		platformProxy: {
