@@ -402,7 +402,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
     © {new Date().getFullYear()} {shopInfo.name} - Hotline: {shopInfo.hotline}
   </footer>
 
-  <!-- Script chạy tại Client để trộn ngẫu nhiên 4/8 sản phẩm mỗi lần tải trang -->
+<!-- Script chạy tại Client để trộn ngẫu nhiên 4/8 sản phẩm mỗi lần tải trang -->
   <script define:vars={{ products, currentSlug: product.slug }}>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Lọc sản phẩm hiện tại ra khỏi danh sách 8 sản phẩm
