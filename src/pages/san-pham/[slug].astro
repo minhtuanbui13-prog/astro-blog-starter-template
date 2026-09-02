@@ -215,9 +215,13 @@ const shopInfo = {
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
-// Lọc ra 4 sản phẩm ngẫu nhiên hoặc khác sản phẩm hiện tại làm sản phẩm tương tự
-const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4);
----
+// 1. Lọc bỏ sản phẩm đang xem
+const otherProducts = products.filter(p => p.slug !== product.slug);
+
+// 2. Trộn ngẫu nhiên danh sách sản phẩm còn lại và lấy 4 sản phẩm
+const relatedProducts = otherProducts
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 4);
 
 <!DOCTYPE html>
 <html lang="vi">
