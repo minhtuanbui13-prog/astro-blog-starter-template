@@ -4,7 +4,7 @@ const shopInfo = {
   name: "Vyy Lady Store",
   slogan: "Snack Your Style, Chill Your Way",
   hotline: "1900 8280",
-  zalo: "0896443368", // Thêm dòng này
+  zalo: "0896443368",
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
@@ -107,257 +107,373 @@ const products = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{shopInfo.name} - {shopInfo.slogan}</title>
   
-  <!-- Giữ nguyên Favicon của bạn -->
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
-}
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f8fafc;
+    }
+        
+    /* TOP BAR & HEADER */
+    .top-bar { 
+      background: #0f172a; 
+      color: #fff; 
+      font-size: clamp(10px, 2.8vw, 13px); 
+      padding: 6px 10px; 
+      text-align: center; 
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .top-bar a { 
+      color: #facc15; 
+      font-weight: bold; 
+      text-decoration: underline; 
+    }
+
+    header { 
+      background: #ffffff; 
+      border-bottom: 1px solid #e2e8f0; 
+      position: sticky; 
+      top: 0; 
+      z-index: 50; 
+    }
+
+    .header-container { 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 10px 12px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      gap: 8px; 
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .logo { 
+      color: #0066ff; 
+      font-size: clamp(16px, 5vw, 22px); 
+      font-weight: 900; 
+      text-transform: uppercase; 
+      text-decoration: none; 
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .slogan { 
+      font-size: clamp(10px, 3vw, 12px); 
+      color: #64748b; 
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .btn-hotline { 
+      background: #0066ff; 
+      color: #fff; 
+      padding: 5px 14px; 
+      border-radius: 20px; 
+      font-weight: 600; 
+      font-size: clamp(11px, 3vw, 13px); 
+      text-decoration: none; 
+      white-space: nowrap;
+      display: inline-block;
+      box-shadow: 0 2px 4px rgba(0, 102, 255, 0.2);
+    }
+
+    @media (min-width: 768px) {
+      .header-container { 
+        flex-direction: row; 
+        justify-content: space-between; 
+        padding: 12px 16px;
+      }
+      .header-brand {
+        flex-direction: row; 
+        align-items: baseline;
+        gap: 8px;
+      }
+    }
+        
+    /* HERO BANNER */
+    .hero-full {
+      width: 100%;
+      position: relative;
+      line-height: 0;
+      margin: 0 auto 20px auto;
+      overflow: hidden;
+    }
+
+    .hero-img-wrap {
+      width: 100%;
+      background: #000;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .hero-content-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 8px 6px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+    }
+
+    .hero-content-overlay .hero-badge {
+      background: rgba(0, 102, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: clamp(8px, 2.2vw, 11px);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    .hero-content-overlay h2 {
+      font-size: clamp(11px, 3.2vw, 26px);
+      font-weight: 800;
+      margin: 2px 0 4px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .hero-content-overlay p {
+      color: #f1f5f9;
+      font-size: clamp(8px, 2.2vw, 13px);
+      margin-bottom: 8px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 768px) {
+      .hero-content-overlay {
+        padding: 16px 20px;
+      }
+      .hero-content-overlay .hero-badge {
+        padding: 4px 12px;
+        margin-bottom: 8px;
+      }
+      .hero-content-overlay h2 {
+        margin: 6px 0 8px;
+      }
+      .hero-content-overlay p {
+        margin-bottom: 16px;
+      }
+    }
+
+    /* MAIN CONTENT */
+    main { 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 16px; 
+      flex-grow: 1; 
+      width: 100%; 
+    }
+    .section-title { 
+      font-size: 20px; 
+      font-weight: 700; 
+      margin-bottom: 24px; 
+      border-bottom: 2px solid #e2e8f0; 
+      padding-bottom: 8px; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+    }
+    .title-bar { 
+      width: 8px; 
+      height: 20px; 
+      background: #0066ff; 
+      border-radius: 4px; 
+    }
     
-/* --- TỐI ƯU HEADER VÀ TOP-BAR TRÊN ĐIỆN THOẠI KHÔNG BỊ VỠ KHUNG --- */
-.top-bar { 
-  background: #0f172a; 
-  color: #fff; 
-  font-size: clamp(10px, 2.8vw, 13px); 
-  padding: 6px 10px; 
-  text-align: center; 
-  line-height: 1.4;
-  word-break: break-word; /* Tránh vỡ khung nếu câu dài */
-}
-.top-bar a { 
-  color: #facc15; 
-  font-weight: bold; 
-  text-decoration: underline; 
-}
-
-header { 
-  background: #ffffff; 
-  border-bottom: 1px solid #e2e8f0; 
-  position: sticky; 
-  top: 0; 
-  z-index: 50; 
-}
-
-.header-container { 
-  max-width: 1100px; 
-  margin: 0 auto; 
-  padding: 10px 12px; 
-  display: flex; 
-  flex-direction: column; /* Trên di động: Xếp thương hiệu và hotline thành 2 tầng cân đối */
-  align-items: center; 
-  gap: 8px; 
-}
-
-/* Khung chứa Thương hiệu: Dòng trên Logo, Dòng dưới Slogan */
-.header-brand {
-  display: flex;
-  flex-direction: column; /* Xếp Logo ở trên, Slogan ở dưới */
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 2px;
-}
-
-.logo { 
-  color: #0066ff; 
-  font-size: clamp(16px, 5vw, 22px); 
-  font-weight: 900; 
-  text-transform: uppercase; 
-  text-decoration: none; 
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-.slogan { 
-  font-size: clamp(10px, 3vw, 12px); 
-  color: #64748b; 
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.btn-hotline { 
-  background: #0066ff; 
-  color: #fff; 
-  padding: 5px 14px; 
-  border-radius: 20px; 
-  font-weight: 600; 
-  font-size: clamp(11px, 3vw, 13px); 
-  text-decoration: none; 
-  white-space: nowrap;
-  display: inline-block;
-  box-shadow: 0 2px 4px rgba(0, 102, 255, 0.2);
-}
-
-/* Tự động chuyển sang 1 hàng ngang khi xem trên Máy tính (Desktop) */
-@media (min-width: 768px) {
-  .header-container { 
-    flex-direction: row; 
-    justify-content: space-between; 
-    padding: 12px 16px;
-  }
-  .header-brand {
-    flex-direction: row; 
-    align-items: baseline;
-    gap: 8px;
-  }
-}
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+      gap: 20px; 
+    }
+    .card { 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      padding: 16px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      position: relative; 
+      transition: transform 0.2s, box-shadow 0.2s; 
+    }
+    .card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+    }
     
-    .hero { background: linear-gradient(135deg, #2563eb, #0066ff); color: white; padding: 48px 16px; text-align: center; }
-    .hero-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); }
-    .hero h2 { font-size: 32px; font-weight: 800; margin: 16px 0 8px; }
-    .hero p { color: #dbeafe; margin-bottom: 24px; }
-    .btn-hero { background: #ffffff; color: #0066ff; font-weight: 700; padding: 12px 24px; border-radius: 24px; text-decoration: none; display: inline-block; }
+    .card-tag { 
+      position: absolute; 
+      top: 8px; 
+      left: 8px; 
+      background: #0066ff; 
+      color: #fff; 
+      font-size: 10px; 
+      font-weight: 700; 
+      padding: 4px 8px; 
+      border-radius: 6px; 
+      z-index: 10; 
+    }
     
-    main { max-width: 1100px; margin: 0 auto; padding: 32px 16px; flex-grow: 1; width: 100%; }
-    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    .title-bar { width: 8px; height: 20px; background: #0066ff; border-radius: 4px; }
+    .card-img-wrap { 
+      width: 100%; 
+      aspect-ratio: 1 / 1; 
+      background: #f8fafc; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      margin-bottom: 12px; 
+      position: relative; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 8px; 
+    }
+    .card-img { 
+      max-width: 100%; 
+      max-height: 100%; 
+      width: auto; 
+      height: auto; 
+      object-fit: contain; 
+      object-position: center; 
+      display: block; 
+      transition: transform 0.3s ease; 
+    }
+    .card:hover .card-img { 
+      transform: scale(1.05); 
+    }
     
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .card-category { 
+      font-size: 11px; 
+      font-weight: 700; 
+      color: #0066ff; 
+      text-transform: uppercase; 
+    }
+    .card-title { 
+      font-size: 15px; 
+      font-weight: 700; 
+      margin: 4px 0; 
+      color: #0f172a; 
+      line-height: 1.3; 
+    }
+    .card-desc { 
+      font-size: 12px; 
+      color: #64748b; 
+      margin-bottom: 12px; 
+      display: -webkit-box; 
+      -webkit-line-clamp: 2; 
+      -webkit-box-orient: vertical; 
+      overflow: hidden; 
+    }
+    .price-group { 
+      display: flex; 
+      align-items: baseline; 
+      gap: 8px; 
+      margin-bottom: 12px; 
+    }
+    .card-price { 
+      font-size: 18px; 
+      font-weight: 800; 
+      color: #0066ff; 
+    }
+    .original-price { 
+      font-size: 12px; 
+      color: #94a3b8; 
+      text-decoration: line-through; 
+    }
+    .btn-buy { 
+      background: #0066ff; 
+      color: white; 
+      text-align: center; 
+      width: 100%; 
+      padding: 10px; 
+      border-radius: 8px; 
+      font-weight: 600; 
+      text-decoration: none; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 6px; 
+      transition: background 0.2s; 
+    }
+    .btn-buy:hover { 
+      background: #0052cc; 
+    }
     
-    .card-tag { position: absolute; top: 8px; left: 8px; background: #0066ff; color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 6px; z-index: 10; }
-    
-    .card-img-wrap { width: 100%; aspect-ratio: 1 / 1 !important; background: #f8fafc; border-radius: 8px; overflow: hidden; margin-bottom: 12px; position: relative; display: flex; align-items: center; justify-content: center; padding: 8px; }
-    .card-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain !important; object-position: center; display: block; transition: transform 0.3s ease; }
-    .card:hover .card-img { transform: scale(1.05); }
-    
-    .card-category { font-size: 11px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
-    .card-title { font-size: 15px; font-weight: 700; margin: 4px 0; color: #0f172a; line-height: 1.3; }
-    .card-desc { font-size: 12px; color: #64748b; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .price-group { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
-    .card-price { font-size: 18px; font-weight: 800; color: #0066ff; }
-    .original-price { font-size: 12px; color: #94a3b8; text-decoration: line-through; }
-.btn-buy { 
-  background: #0066ff; 
-  color: white; 
-  text-align: center; 
-  width: 100%; 
-  padding: 10px; 
-  border-radius: 8px; 
-  font-weight: 600; 
-  text-decoration: none; /* Giúp bỏ gạch chân */
-  display: flex;         /* Chuyển thành flex để căn giữa chuẩn hơn */
-  align-items: center;   /* Canh giữa theo chiều dọc */
-  justify-content: center; /* Canh giữa theo chiều ngang */
-  gap: 6px;              /* Khoảng cách giữa chữ và icon (nếu có) */
-  transition: background 0.2s; 
-}
-.btn-buy:hover { background: #0052cc; }
-    
-    footer { background: #0f172a; color: white; margin-top: 40px; border-top: 3px solid #0066ff; }
-    .footer-container { max-width: 1100px; margin: 0 auto; padding: 32px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
-    .footer-title { color: #0066ff; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
-    .footer-text { font-size: 13px; color: #94a3b8; line-height: 1.6; }
-    .copyright { background: #020617; text-align: center; padding: 12px; font-size: 12px; color: #64748b; }
-
-/* --- CĂN CHỈNH HERO BANNER KHÔNG BỊ MẤT ẢNH 2 BÊN --- */
-.hero-full {
-  width: 100%;
-  position: relative;
-  line-height: 0;
-  margin: 0 auto 20px auto;
-  overflow: hidden;
-}
-
-.hero-img-wrap {
-  width: 100%;
-  background: #000;
-}
-
-.hero-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  object-position: center;
-}
-
-.hero-content-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 95%;
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-  padding: 8px 6px;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.45);
-  border-radius: 10px;
-}
-
-.hero-content-overlay .hero-badge {
-  background: rgba(0, 102, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ffffff;
-  padding: 2px 8px;
-  border-radius: 8px;
-  font-size: clamp(8px, 2.2vw, 11px);
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-  white-space: nowrap; /* Giữ Badge luôn trên 1 hàng */
-}
-
-.hero-content-overlay h2 {
-  font-size: clamp(11px, 3.2vw, 26px); /* Co font vừa đủ để đố chữ nằm trên 1 hàng */
-  font-weight: 800;
-  margin: 2px 0 4px;
-  line-height: 1.2;
-  white-space: nowrap; /* Đảm bảo Tiêu đề luôn nằm trên 1 hàng */
-}
-
-.hero-content-overlay p {
-  color: #f1f5f9;
-  font-size: clamp(8px, 2.2vw, 13px);
-  margin-bottom: 8px;
-  line-height: 1.2;
-  white-space: nowrap; /* Đảm bảo dòng Mô tả luôn nằm trên 1 hàng */
-}
-
-.hero-content-overlay .btn-hero {
-  background: #ffffff;
-  color: #0066ff;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 16px;
-  text-decoration: none;
-  font-size: clamp(9px, 2.4vw, 12px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; /* Nút bấm nằm nguyên trên 1 hàng */
-}
-
-/* Cấu hình lề cho màn hình máy tính (Desktop) */
-@media (min-width: 768px) {
-  .hero-content-overlay {
-    padding: 16px 20px;
-  }
-  .hero-content-overlay .hero-badge {
-    padding: 4px 12px;
-    margin-bottom: 8px;
-  }
-  .hero-content-overlay h2 {
-    margin: 6px 0 8px;
-  }
-  .hero-content-overlay p {
-    margin-bottom: 16px;
-  }
-  .hero-content-overlay .btn-hero {
-    padding: 8px 18px;
-  }
-}
-/* --- KẾT THÚC CSS MỚI --- */
-
+    /* FOOTER */
+    footer { 
+      background: #0f172a; 
+      color: white; 
+      margin-top: 40px; 
+      border-top: 3px solid #0066ff; 
+    }
+    .footer-container { 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 32px 16px; 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+      gap: 24px; 
+    }
+    .footer-title { 
+      color: #0066ff; 
+      font-weight: 800; 
+      text-transform: uppercase; 
+      margin-bottom: 8px; 
+    }
+    .footer-text { 
+      font-size: 13px; 
+      color: #94a3b8; 
+      line-height: 1.6; 
+    }
+    .copyright { 
+      background: #020617; 
+      text-align: center; 
+      padding: 12px; 
+      font-size: 12px; 
+      color: #64748b; 
+    }
   </style>
 </head>
 <body>
@@ -365,27 +481,26 @@ header {
     🚀 Mua sắm dễ dàng tại <strong>{shopInfo.name}</strong> - Hotline: <a href={`tel:${shopInfo.hotline}`}>{shopInfo.hotline}</a>
   </div>
 
-<header>
-  <div class="header-container">
-    <div class="header-brand">
-      <a href="#" class="logo">{shopInfo.name}</a>
-      <span class="slogan">{shopInfo.slogan}</span>
+  <header>
+    <div class="header-container">
+      <div class="header-brand">
+        <a href="/" class="logo">{shopInfo.name}</a>
+        <span class="slogan">{shopInfo.slogan}</span>
+      </div>
+      <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
     </div>
-    <a href={`tel:${shopInfo.hotline}`} class="btn-hotline">📞 Hotline: {shopInfo.hotline}</a>
-  </div>
-</header>
+  </header>
 
-<section class="hero-full">
-  <div class="hero-img-wrap">
-    <img src="https://vyylady.com/wp-content/uploads/2025/06/Vyy-Lady-Website-Banner.png" alt="Vyy Lady Banner" class="hero-img" />
-  </div>
-  <div class="hero-content-overlay">
-    <span class="hero-badge">Trải Nghiệm Mua Sắm Chuẩn Style</span>
-    <h2>Thế Giới Snack & Ăn Vặt</h2>
-    <p>Chất lượng cao cấp - Hương vị đậm đà - Giao hàng cực nhanh.</p>
-    <a href="#products" class="btn-hero">Xem danh mục sản phẩm 👇</a>
-  </div>
-</section>
+  <section class="hero-full">
+    <div class="hero-img-wrap">
+      <img src="https://vyylady.com/wp-content/uploads/2025/06/Vyy-Lady-Website-Banner.png" alt="Vyy Lady Banner" class="hero-img" />
+    </div>
+    <div class="hero-content-overlay">
+      <span class="hero-badge">Trải Nghiệm Mua Sắm Chuẩn Style</span>
+      <h2>Thế Giới Snack & Ăn Vặt</h2>
+      <p>Chất lượng cao cấp - Hương vị đậm đà - Giao hàng cực nhanh.</p>
+    </div>
+  </section>
 
   <main id="products">
     <div class="section-title">
@@ -396,25 +511,27 @@ header {
     <div class="grid">
       {products.map((item) => (
         <div class="card">
-  <div>
-    <a href={`/san-pham/${item.slug}`} style="text-decoration: none; color: inherit;">
-      <div class="card-img-wrap">
-        {item.tag && <span class="card-tag">{item.tag}</span>}
-        <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
-      </div>
-      <div class="card-category">{item.category}</div>
-      <div class="card-title">{item.name}</div>
-    </a>
-    <div class="card-desc">{item.desc}</div>
-  </div>
-  <div>
-    <div class="price-group">
-      <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
-      {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
-    </div>
-    <a href={`https://zalo.me/${shopInfo.zalo}`} target="_blank" rel="noopener noreferrer" class="btn-buy">Liên hệ tư vấn</a>
-  </div>
-</div>
+          {item.tag && <span class="card-tag">{item.tag}</span>}
+          <div>
+            <a href={`/san-pham/${item.slug}`} style="text-decoration: none; color: inherit;">
+              <div class="card-img-wrap">
+                <img src={item.image} alt={item.name} class="card-img" loading="lazy" />
+              </div>
+              <div class="card-category">{item.category}</div>
+              <div class="card-title">{item.name}</div>
+            </a>
+            <div class="card-desc">{item.desc}</div>
+          </div>
+          <div>
+            <div class="price-group">
+              <span class="card-price">{item.price.toLocaleString('vi-VN')}đ</span>
+              {item.originalPrice && <span class="original-price">{item.originalPrice.toLocaleString('vi-VN')}đ</span>}
+            </div>
+            <a href={`https://zalo.me/${shopInfo.zalo}`} target="_blank" rel="noopener noreferrer" class="btn-buy">
+              Liên hệ tư vấn
+            </a>
+          </div>
+        </div>
       ))}
     </div>
   </main>
