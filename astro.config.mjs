@@ -7,9 +7,13 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-	// Dòng 10 hiện tại bị lỗi thiếu dấu "
-site: "https://buiminhtuan.io.vn",
-	integrations: [mdx(), sitemap()],
+	site: "https://buiminhtuan.io.vn",
+	integrations: [
+		mdx(), 
+		sitemap({
+			prerender: true,
+		})
+	],
 	adapter: cloudflare({
 		platformProxy: {
 			enabled: true,
