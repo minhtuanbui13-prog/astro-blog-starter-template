@@ -215,7 +215,6 @@ const shopInfo = {
   address: "622 Minh Khai, Hai Bà Trưng, Hà Nội"
 };
 
-// Lấy mặc định 4 sản phẩm đầu tiên phục vụ render khung HTML ban đầu
 const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4);
 ---
 
@@ -228,79 +227,109 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { 
+    *, *::before, *::after { 
       box-sizing: border-box; 
       margin: 0; 
       padding: 0; 
       font-family: 'Montserrat', system-ui, -apple-system, sans-serif; 
     }
     
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+
     header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
-    .header-container { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { color: #0066ff; font-size: 22px; font-weight: 900; text-transform: uppercase; text-decoration: none; }
+    .header-container { max-width: 1000px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { color: #0066ff; font-size: 20px; font-weight: 900; text-transform: uppercase; text-decoration: none; }
     .back-home { font-size: 14px; color: #64748b; text-decoration: none; font-weight: 600; }
     .back-home:hover { color: #0066ff; }
 
-    main { max-width: 900px; margin: 40px auto; padding: 0 16px; flex-grow: 1; width: 100%; }
+    main { max-width: 1000px; margin: 30px auto; padding: 0 16px; width: 100%; }
     
-    .product-detail-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-bottom: 50px; }
-    @media (max-width: 768px) { .product-detail-container { grid-template-columns: 1fr; } }
+    /* FIX KHUNG SẢN PHẨM CHÍNH */
+    .product-detail-container { 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 16px; 
+      padding: 24px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 24px; 
+      margin-bottom: 40px; 
+    }
+
+    @media (min-width: 768px) {
+      .product-detail-container { 
+        display: grid; 
+        grid-template-columns: 360px 1fr; 
+        gap: 32px; 
+        align-items: start;
+      }
+    }
 
     .product-img-wrap { 
       width: 100%; 
-      aspect-ratio: 1 / 1; 
+      height: 360px; 
+      max-height: 360px;
       background: #f8fafc; 
       border-radius: 12px; 
       overflow: hidden; 
       display: flex; 
       align-items: center;    
       justify-content: center; 
-      padding: 20px;           
+      padding: 16px;           
       border: 1px solid #e2e8f0; 
+      box-sizing: border-box;
     }
 
     .product-img { 
       max-width: 100%;       
       max-height: 100%;      
+      width: auto;
+      height: auto;
       object-fit: contain;   
+      display: block;
     }
 
-    .product-info { display: flex; flex-direction: column; gap: 16px; }
-    .category { font-size: 13px; font-weight: 700; color: #0066ff; text-transform: uppercase; }
-    .title { font-size: 24px; font-weight: 800; color: #0f172a; line-height: 1.3; }
+    .product-info { display: flex; flex-direction: column; gap: 14px; }
+    .category { font-size: 12px; font-weight: 700; color: #0066ff; text-transform: uppercase; letter-spacing: 0.5px; }
+    .title { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1.3; }
     
-    .price-box { display: flex; align-items: baseline; gap: 12px; background: #f1f5f9; padding: 12px 16px; border-radius: 8px; }
-    .price { font-size: 24px; font-weight: 800; color: #0066ff; }
+    .price-box { display: flex; align-items: baseline; gap: 12px; background: #f1f5f9; padding: 10px 14px; border-radius: 8px; width: fit-content; }
+    .price { font-size: 22px; font-weight: 800; color: #0066ff; }
     .original-price { font-size: 14px; color: #94a3b8; text-decoration: line-through; }
 
-    .desc { font-size: 15px; color: #475569; line-height: 1.6; }
-    .detail-box { font-size: 14px; color: #334155; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+    .desc { font-size: 14px; color: #475569; line-height: 1.5; }
+    .detail-box { font-size: 13px; color: #334155; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 12px; }
 
-    .btn-zalo { background: #0066ff; color: white; text-align: center; padding: 14px; border-radius: 8px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; margin-top: 8px; }
+    .btn-zalo { background: #0066ff; color: white; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; margin-top: 6px; font-size: 14px; }
     .btn-zalo:hover { background: #0052cc; }
 
-    /* Phần Sản phẩm tương tự Fix Chuẩn 4 Cột */
-    .section-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
+    /* FIX KHUNG SẢN PHẨM TƯƠNG TỰ */
+    .section-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
     
     .related-grid { 
       display: grid; 
       grid-template-columns: repeat(2, 1fr); 
       gap: 16px; 
       width: 100%;
+      box-sizing: border-box;
     }
 
     @media (min-width: 768px) {
       .related-grid { 
         grid-template-columns: repeat(4, 1fr); 
-        gap: 20px; 
+        gap: 16px; 
       }
     }
 
     .card { 
       background: #ffffff; 
       border: 1px solid #e2e8f0; 
-      border-radius: 16px; 
-      padding: 16px; 
+      border-radius: 12px; 
+      padding: 12px; 
       display: flex; 
       flex-direction: column; 
       justify-content: space-between; 
@@ -314,20 +343,21 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
 
     .card:hover { 
       transform: translateY(-4px); 
-      box-shadow: 0 12px 24px rgba(0,0,0,0.08); 
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06); 
     }
 
     .card-img-wrap { 
       width: 100%; 
-      height: 160px; 
+      height: 150px; 
+      max-height: 150px;
       background: #f8fafc; 
-      border-radius: 12px; 
+      border-radius: 8px; 
       overflow: hidden; 
       display: flex; 
       align-items: center;    
       justify-content: center; 
-      padding: 12px; 
-      margin-bottom: 12px; 
+      padding: 8px; 
+      margin-bottom: 10px; 
       border: 1px solid #f1f5f9;
       box-sizing: border-box;
     }
@@ -347,23 +377,23 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
     }
 
     .card-title { 
-      font-size: 14px; 
+      font-size: 13px; 
       font-weight: 700; 
       color: #0f172a; 
-      margin-bottom: 6px; 
+      margin-bottom: 4px; 
       line-height: 1.4;
       display: -webkit-box; 
       -webkit-line-clamp: 2; 
       -webkit-box-orient: vertical; 
       overflow: hidden; 
-      min-height: 2.8em;
+      height: 2.8em;
     }
 
     .card-price { 
-      font-size: 15px; 
+      font-size: 14px; 
       font-weight: 800; 
       color: #0066ff; 
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     footer { background: #0f172a; color: white; margin-top: 40px; border-top: 3px solid #0066ff; text-align: center; padding: 20px; font-size: 13px; color: #94a3b8; }
@@ -379,7 +409,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
   </header>
 
   <main>
-    <!-- Thông tin chi tiết sản phẩm chính -->
+    <!-- Chi tiết sản phẩm -->
     <div class="product-detail-container">
       <div class="product-img-wrap">
         <img src={product.image} alt={product.name} class="product-img" />
@@ -408,7 +438,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
       </div>
     </div>
 
-    <!-- Danh sách sản phẩm tương tự -->
+    <!-- Sản phẩm tương tự -->
     <div class="related-section">
       <h3 class="section-title">Sản phẩm tương tự</h3>
       <div class="related-grid">
@@ -431,7 +461,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
     © {new Date().getFullYear()} {shopInfo.name} - Hotline: {shopInfo.hotline}
   </footer>
 
-  <!-- Script Client trộn ngẫu nhiên 4/8 sản phẩm chuẩn HTML -->
+  <!-- Script trộn ngẫu nhiên -->
   <script define:vars={{ products, currentSlug: product.slug }}>
     document.addEventListener('DOMContentLoaded', () => {
       const otherProducts = products.filter(p => p.slug !== currentSlug);
