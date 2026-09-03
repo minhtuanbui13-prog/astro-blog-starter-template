@@ -1,6 +1,7 @@
 ---
 // src/pages/san-pham/[slug].astro
 
+// 1. Quản lý danh sách sản phẩm tại một nơi duy nhất
 const products = [
   {
     id: 1,
@@ -101,106 +102,8 @@ const products = [
 ];
 
 export async function getStaticPaths() {
-  const allProducts = [
-    {
-      id: 1,
-      slug: "chan-ga-nguyen-xuong-vyy-te-dinh-35g",
-      name: "Chân gà nguyên xương Vyy Tê Đỉnh 35g",
-      category: "Chân gà tẩm vị",
-      price: 15000,
-      originalPrice: 18000,
-      tag: "Bán chạy",
-      image: "/san-pham/1.png",
-      desc: "Vị tê cay bùng nổ, giòn sật đậm vị, dành riêng cho team mê cay và thích ăn có gu.",
-      detail: "Chân gà nguyên xương Vyy Tê Đỉnh được chế biến từ những nguyên liệu tươi ngon nhất, tẩm ướp theo công thức độc quyền. Vị tê cay đậm đà kích thích vị giác ngay từ miếng đầu tiên, cực kỳ phù hợp làm món ăn vặt nhâm nhi lúc giải trí hoặc xem phim."
-    },
-    {
-      id: 2,
-      slug: "chan-ga-khong-xuong-vyy-quoc-dan-26g",
-      name: "Chân gà không xương Vyy Quốc Dân 26g",
-      category: "Chân gà rút xương",
-      price: 18000,
-      originalPrice: 22000,
-      tag: "Hot item",
-      image: "/san-pham/2.png",
-      desc: "Chân gà rút xương vị truyền thống, dễ ăn, đậm đà, chuẩn gu “ai ăn cũng mê.",
-      detail: "Chân gà không xương tiện lợi, đã được rút toàn bộ xương kỹ lưỡng nhưng vẫn giữ nguyên độ giòn sật đặc trưng. Thấm đẫm gia vị truyền thống thơm ngon."
-    },
-    {
-      id: 3,
-      slug: "chan-ga-nguyen-xuong-te-cay-vyy-max-chill-50g",
-      name: "Chân gà nguyên xương tê cay Vyy Max Chill 50g",
-      category: "Chân gà có xương",
-      price: 22000,
-      originalPrice: 25000,
-      tag: "Mới",
-      image: "/san-pham/3.png",
-      desc: "Chân gà nguyên xương size to, vị tê cay bùng nổ dành cho team mê đậm vị. Càng gặm càng ghiền!.",
-      detail: "Phiên bản size to siêu đã dành cho các tín đồ ăn vặt hệ 'Max Chill'. Từng chiếc chân gà đẫm sốt cay tê nồng nàn."
-    },
-    {
-      id: 4,
-      slug: "chan-ga-nguyen-xuong-vyy-du-doi-65g",
-      name: "Chân gà nguyên xương Vyy Đủ Đôi 65g",
-      category: "Chân gà có xương",
-      price: 8000,
-      originalPrice: 10000,
-      tag: "Gợi ý",
-      image: "/san-pham/4.png",
-      desc: "Chân gà nguyên xương 2 chân, bùng nổ dành cho team sợ cô đơn. Càng gặm càng ghiền!.",
-      detail: "Đóng gói gọn nhẹ, hương vị thơm ngon vừa vặn cho những phút giây ăn vặt nhanh gọn."
-    },
-    {
-      id: 5,
-      slug: "chan-ga-khong-xuong-vyy-chill-nhe-26g",
-      name: "Chân gà không xương Vyy Chill Nhẹ 26g",
-      category: "Chân gà rút xương",
-      price: 16000,
-      originalPrice: 20000,
-      tag: "Bán chạy",
-      image: "/san-pham/5.png",
-      desc: "Chân gà không xương, vị cay ngọt dịu nhẹ, dành riêng cho những ngày cần chill mà không muốn “bung nóc”.",
-      detail: "Vị cay ngọt hài hòa, không quá cay gắt, cực kỳ hợp cho các bạn thích ăn vặt nhẹ nhàng."
-    },
-    {
-      id: 6,
-      slug: "chan-ga-vyy-chanh-tay",
-      name: "Chân gà Vyy Chanh Tây",
-      category: "Chân gà rút xương",
-      price: 35000,
-      originalPrice: 40000,
-      tag: "Cao cấp",
-      image: "/san-pham/6.jpg",
-      desc: "Chân gà rút xương thấm sốt chanh tây chua cay tươi mát, giòn chắc, dễ ăn và cực cuốn.",
-      detail: "Hương vị chanh tây thanh mát kết hợp cùng vị cay nhẹ tạo nên điểm nhấn độc đáo, ăn hoài không ngấy."
-    },
-    {
-      id: 7,
-      slug: "quay-dui-ga-pho-mai-cay-60g",
-      name: "Quẩy đùi gà phô mai cay 60g",
-      category: "Đồ khô giòn",
-      price: 12000,
-      originalPrice: 15000,
-      tag: "Hot item",
-      image: "/san-pham/7.png",
-      desc: "Hình đùi gà ngộ nghĩnh, lắc bột phô mai béo ngậy mặn ngọt.",
-      detail: "Giòn rụm với lớp bột phô mai thơm phức béo ngậy phủ bên ngoài."
-    },
-    {
-      id: 8,
-      slug: "dau-hu-thoi-tu-xuyen-dong-goi-45g",
-      name: "Đậu hũ thối Tứ Xuyên đóng gói 45g",
-      category: "Ăn vặt nội địa",
-      price: 14000,
-      originalPrice: 17000,
-      tag: "Mới",
-      image: "/san-pham/8.png",
-      desc: "Vị đậm đà béo ngậy chuẩn nội địa Trung, ăn là ghiền.",
-      detail: "Đặc sản chuẩn vị nội địa mang đến trải nghiệm vị giác vô cùng độc đáo và cuốn hút."
-    }
-  ];
-
-  return allProducts.map((product) => ({
+  // Tái sử dụng mảng products trực tiếp ở đây
+  return products.map((product) => ({
     params: { slug: product.slug },
     props: { product },
   }));
@@ -224,8 +127,16 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{product.name} - {shopInfo.name}</title>
+  <meta name="description" content={product.desc} />
+  
+  <!-- Open Graph / Zalo / Facebook Share -->
+  <meta property="og:title" content={`${product.name} - ${shopInfo.name}`} />
+  <meta property="og:description" content={product.desc} />
+  <meta property="og:image" content={product.image} />
+
   <link rel="icon" type="image/png" href="https://6a9697843db6a220b86461d0.imgix.net/sandbox/favicon-tbn.png" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
     *, *::before, *::after { 
       box-sizing: border-box; 
@@ -248,7 +159,6 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
 
     main { max-width: 1000px; margin: 30px auto; padding: 0 16px; width: 100%; }
     
-    /* FIX CHI TIẾT SẢN PHẨM CHÍNH */
     .product-detail-container { 
       background: #ffffff; 
       border: 1px solid #e2e8f0; 
@@ -305,7 +215,6 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
     .btn-zalo { background: #0066ff; color: white; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; margin-top: 6px; font-size: 14px; }
     .btn-zalo:hover { background: #0052cc; }
 
-    /* FIX SẢN PHẨM TƯƠNG TỰ - CHỐNG VỠ HOÀN TOÀN */
     .section-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: #0f172a; border-left: 4px solid #0066ff; padding-left: 10px; }
     
     .related-grid { 
@@ -332,7 +241,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
       text-decoration: none; 
       color: inherit; 
       transition: transform 0.2s, box-shadow 0.2s;
-      min-width: 0; /* CHỐNG VỠ GRID */
+      min-width: 0;
       overflow: hidden;
     }
 
@@ -343,7 +252,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
 
     .card-img-wrap { 
       width: 100%; 
-      height: 150px; /* KHÓA CHIỀU CAO CỐ ĐỊNH */
+      height: 150px; 
       background: #f8fafc; 
       border-radius: 8px; 
       overflow: hidden; 
@@ -356,11 +265,11 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
     }
 
     .card-img { 
-      max-width: 100% !important;
-      max-height: 100% !important;
-      width: auto !important;
-      height: auto !important;
-      object-fit: contain !important; /* GIỮ TỶ LỆ Chuẩn */
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain; 
       display: block;
     }
 
@@ -372,6 +281,7 @@ const relatedProducts = products.filter(p => p.slug !== product.slug).slice(0, 4
       line-height: 1.4;
       display: -webkit-box; 
       -webkit-line-clamp: 2; 
+      line-clamp: 2;
       -webkit-box-orient: vertical; 
       overflow: hidden; 
       height: 2.8em;
